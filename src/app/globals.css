@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-heebo), Arial, sans-serif;
+
+  /* פלטת הקליניקה */
+  --color-cream: #faf7f4;
+  --color-sand: #efe6dd;
+  --color-ink: #2e2a28;
+  --color-muted: #7a716c;
+  --color-line: #e4dbd2;
+  --color-rose: #b5838d;
+  --color-rose-dark: #96636d;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* מניעת זום אוטומטי בשדות קלט ב-iOS */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
