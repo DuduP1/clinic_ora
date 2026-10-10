@@ -16,3 +16,8 @@ npm run dev
 ```
 
 כל המפתחות נשמרים במשתני סביבה בלבד: `.env.local` במחשב, ו-Environment Variables ב-Vercel. הם לא נשמרים בקוד.
+
+## מסד נתונים
+- המבנה נמצא ב-`supabase/migrations/`. מחילים אותו עם `npx supabase db push`.
+- נתוני דמו (משתמשות, לקוחות, תורים ופניות): `node --env-file=.env.local scripts/seed-demo.mjs`.
+- בדיקות קבלה (RLS, אילוצים ופונקציות הסוכן): `node --env-file=.env.local scripts/verify-db.mjs`.
