@@ -1,33 +1,18 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
+import { QUICK_SEARCH_ID } from "@/components/keyboard-shortcuts";
 
 /**
  * חיפוש לקוחה מהיר בכותרת (PRD 4) – זמין בכל מסך.
  * טלפון מלא → ישר לכרטיס; אחרת רשימת תוצאות במסך הלקוחות.
- * קיצור מקלדת: "/" או Ctrl/⌘+K.
+ * קיצור מקלדת: "/" או Ctrl/⌘+K (ראו keyboard-shortcuts.tsx).
  */
 export function QuickSearch() {
   const pathname = usePathname();
   const params = useSearchParams();
-  const inputRef = useRef<HTMLInputElement>(null);
   // במסך הלקוחות השדה מציג את החיפוש הנוכחי
   const q = pathname === "/customers" ? (params.get("q") ?? "") : "";
-
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      const t = e.target as HTMLElement | null;
-      const typing = t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable);
-      if ((e.key === "/" && !typing) || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k")) {
-        e.preventDefault();
-        inputRef.current?.focus();
-        inputRef.current?.select();
-      }
-    }
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
 
   return (
     <form action="/customers" role="search" className="relative w-full max-w-xs">
@@ -45,7 +30,7 @@ export function QuickSearch() {
       </svg>
       <input
         key={q}
-        ref={inputRef}
+        id={QUICK_SEARCH_ID}
         name="q"
         type="search"
         defaultValue={q}

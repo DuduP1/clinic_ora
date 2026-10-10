@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { QuickSearch } from "@/components/quick-search";
+import { KeyboardShortcuts } from "@/components/keyboard-shortcuts";
 import { requireStaff } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { ROLE_LABEL } from "@/lib/labels";
@@ -21,12 +22,17 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
   return (
     <div className="min-h-screen md:grid md:grid-cols-[15rem_1fr]">
       {/* תפריט צד – מחשב */}
-      <aside className="hidden border-l border-line bg-surface md:flex md:min-h-screen md:flex-col md:gap-6 md:p-4">
+      <aside className="hidden border-l border-line bg-surface md:sticky md:top-0 md:flex md:h-screen md:flex-col md:gap-6 md:overflow-y-auto md:p-4">
         <Link href="/" className="flex items-center gap-2 px-2 pt-1">
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-rose/15 font-bold text-rose-dark">א</span>
           <span className="font-bold">קליניקת אורה</span>
         </Link>
         <SideNav isAdmin={isAdmin} newTickets={newTickets} />
+        <Link href="/help" className="mt-auto flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted hover:bg-sand">
+          <span className="flex h-5 w-5 items-center justify-center rounded-full border border-current text-xs">?</span>
+          עזרה ואודות
+          <kbd className="ms-auto rounded border border-line px-1.5 text-[11px]">?</kbd>
+        </Link>
       </aside>
 
       <div className="flex min-w-0 flex-col">
@@ -37,6 +43,14 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
                 <QuickSearch />
               </Suspense>
             </div>
+            <Link
+              href="/help"
+              aria-label="עזרה וקיצורי מקלדת"
+              title="עזרה וקיצורי מקלדת (?)"
+              className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-surface text-lg font-semibold text-ink transition hover:bg-sand sm:inline-flex"
+            >
+              ?
+            </Link>
             <ThemeToggle />
             <details className="relative">
               <summary className="flex min-h-10 cursor-pointer list-none items-center gap-2 rounded-full px-2 hover:bg-sand">
@@ -57,6 +71,9 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
                     ניהול צוות
                   </Link>
                 )}
+                <Link href="/help" className="block rounded-lg px-3 py-2.5 text-sm hover:bg-sand">
+                  עזרה ואודות
+                </Link>
                 <form action={signOut}>
                   <button className="w-full rounded-lg px-3 py-2.5 text-right text-sm text-red-700 hover:bg-red-50">יציאה</button>
                 </form>
@@ -70,6 +87,7 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
 
       <BottomNav newTickets={newTickets} />
       <ThemedToaster />
+      <KeyboardShortcuts />
     </div>
   );
 }
