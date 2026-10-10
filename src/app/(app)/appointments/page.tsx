@@ -4,7 +4,8 @@ import { dayRange, ymdInTz, zonedToDate } from "@/lib/dates";
 import { APPOINTMENT_STATUS, type AppointmentStatus } from "@/lib/labels";
 import { AppointmentList, APPOINTMENT_SELECT, type AppointmentRow } from "@/components/appointment-list";
 import { AppointmentCalendar, monthGrid } from "@/components/appointment-calendar";
-import { ButtonLink, Card, FilterPill, PageHeader, ViewToggle } from "@/components/ui";
+import { ButtonLink, Card, Toolbar, ViewToggle } from "@/components/ui";
+import { FilterSelect } from "@/components/filter-select";
 
 export const metadata = { title: "תורים · קליניקת אורה" };
 
@@ -61,52 +62,55 @@ export default async function AppointmentsPage({ searchParams }: PageProps<"/app
 
   return (
     <>
-      <PageHeader
+      <Toolbar
         title="תורים"
-        subtitle={view === "list" ? `${data?.length ?? 0} תורים` : undefined}
-        action={<ButtonLink href={day ? `/appointments/new?date=${day}` : "/appointments/new"}>+ תור חדש</ButtonLink>}
+        count={view === "list" ? `${data?.length ?? 0} תורים` : undefined}
+        filters={
+          <>
+            {view === "list" && (
+              <ViewToggle
+                label="טווח"
+                options={(Object.keys(RANGES) as Range[]).map((r) => ({ href: href({ range: r }), label: RANGES[r], active: range === r }))}
+              />
+            )}
+            <FilterSelect
+              label="סטטוס"
+              options={[
+                { label: "הכול", href: href({ status: "" }), active: !status },
+                ...(Object.keys(APPOINTMENT_STATUS) as AppointmentStatus[]).map((s) => ({
+                  label: APPOINTMENT_STATUS[s].label,
+                  href: href({ status: s }),
+                  active: status === s,
+                })),
+              ]}
+            />
+            <FilterSelect
+              label="מטפלת"
+              options={[
+                { label: "כולן", href: href({ staff: "" }), active: !staffId },
+                ...(staff ?? []).map((s) => ({ label: s.full_name, href: href({ staff: s.id }), active: staffId === s.id })),
+              ]}
+            />
+          </>
+        }
+        actions={
+          <>
+            <ViewToggle
+              options={[
+                { href: `/appointments?${new URLSearchParams({ ...(status && { status }), ...(staffId && { staff: staffId }) })}`, label: "☰ רשימה", active: view === "list" },
+                {
+                  href: `/appointments?${new URLSearchParams({ view: "calendar", ...(status && { status }), ...(staffId && { staff: staffId }) })}`,
+                  label: "📅 לוח שנה",
+                  active: view === "calendar",
+                },
+              ]}
+            />
+            <ButtonLink href={day ? `/appointments/new?date=${day}` : "/appointments/new"} className="min-h-9 px-3">
+              + תור
+            </ButtonLink>
+          </>
+        }
       />
-
-      <div className="mb-4 space-y-2">
-        <ViewToggle
-          options={[
-            { href: `/appointments?${new URLSearchParams({ ...(status && { status }), ...(staffId && { staff: staffId }) })}`, label: "☰ רשימה", active: view === "list" },
-            {
-              href: `/appointments?${new URLSearchParams({ view: "calendar", ...(status && { status }), ...(staffId && { staff: staffId }) })}`,
-              label: "📅 לוח שנה",
-              active: view === "calendar",
-            },
-          ]}
-        />
-        {view === "list" && (
-          <div className="flex flex-wrap gap-2">
-            {(Object.keys(RANGES) as Range[]).map((r) => (
-              <FilterPill key={r} href={href({ range: r })} active={range === r}>
-                {RANGES[r]}
-              </FilterPill>
-            ))}
-          </div>
-        )}
-        <div className="flex flex-wrap gap-2">
-          <FilterPill href={href({ status: "" })} active={!status}>
-            כל הסטטוסים
-          </FilterPill>
-          {(Object.keys(APPOINTMENT_STATUS) as AppointmentStatus[]).map((s) => (
-            <FilterPill key={s} href={href({ status: s })} active={status === s}>
-              {APPOINTMENT_STATUS[s].label}
-            </FilterPill>
-          ))}
-          <span className="mx-1 w-px bg-line" />
-          <FilterPill href={href({ staff: "" })} active={!staffId}>
-            כל המטפלות
-          </FilterPill>
-          {(staff ?? []).map((s) => (
-            <FilterPill key={s.id} href={href({ staff: s.id })} active={staffId === s.id}>
-              {s.full_name}
-            </FilterPill>
-          ))}
-        </div>
-      </div>
 
       {view === "calendar" ? (
         <AppointmentCalendar month={month} selectedDay={day} rows={data ?? []} href={href} />

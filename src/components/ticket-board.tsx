@@ -75,7 +75,7 @@ export function TicketBoard({ rows }: { rows: TicketRow[] }) {
               if (id) move(id, col);
               setDragId(null);
             }}
-            className={`flex w-[85%] shrink-0 snap-center flex-col rounded-2xl border border-t-4 border-line bg-sand/40 p-3 transition md:w-auto ${COLUMN_STYLE[col]} ${
+            className={`flex w-[85%] shrink-0 snap-center flex-col rounded-2xl border border-t-4 border-line bg-sand/40 p-3 transition md:h-[calc(100dvh-9.5rem)] md:w-auto ${COLUMN_STYLE[col]} ${
               over === col ? "bg-rose/10 ring-2 ring-rose/40" : ""
             }`}
           >
@@ -84,7 +84,7 @@ export function TicketBoard({ rows }: { rows: TicketRow[] }) {
               <span className="rounded-full bg-surface px-2 py-0.5 text-xs font-semibold text-muted">{list.length}</span>
             </header>
 
-            <ul className="flex min-h-24 flex-1 flex-col gap-2">
+            <ul className="-mx-1 flex min-h-24 flex-1 flex-col gap-2 px-1 md:overflow-y-auto">
               {list.length === 0 && (
                 <li className="rounded-xl border border-dashed border-line p-4 text-center text-xs text-muted">גררי לכאן פנייה</li>
               )}

@@ -4,7 +4,8 @@ import { TICKET_STATUS, type TicketStatus } from "@/lib/labels";
 import { TicketList, TICKET_SELECT, type TicketRow } from "@/components/ticket-list";
 import { TicketBoard } from "@/components/ticket-board";
 import { daysAgoIso } from "@/lib/dates";
-import { ButtonLink, Card, FilterPill, PageHeader, ViewToggle } from "@/components/ui";
+import { ButtonLink, Card, FilterPill, Toolbar, ViewToggle } from "@/components/ui";
+import { FilterSelect } from "@/components/filter-select";
 
 export const metadata = { title: "פניות שירות · קליניקת אורה" };
 
@@ -42,37 +43,48 @@ export default async function TicketsPage({ searchParams }: PageProps<"/tickets"
 
   return (
     <>
-      <PageHeader title="פניות שירות" subtitle={`${data?.length ?? 0} פניות`} action={<ButtonLink href="/tickets/new">+ פנייה חדשה</ButtonLink>} />
-
-      <div className="mb-4 space-y-2">
-        <ViewToggle
-          options={[
-            { href: href({ view: "" }), label: "☰ רשימה", active: view === "list" },
-            { href: href({ view: "board" }), label: "▦ קאנבאן", active: view === "board" },
-          ]}
-        />
-        {view === "list" && (
-        <div className="flex flex-wrap gap-2">
-          <FilterPill href={href({ status: "open" })} active={status === "open"}>פתוחות</FilterPill>
-          {(Object.keys(TICKET_STATUS) as TicketStatus[]).map((s) => (
-            <FilterPill key={s} href={href({ status: s })} active={status === s}>
-              {TICKET_STATUS[s].label}
+      <Toolbar
+        title="פניות שירות"
+        count={`${data?.length ?? 0} פניות`}
+        filters={
+          <>
+            {view === "list" && (
+              <ViewToggle
+                label="סטטוס"
+                options={[
+                  { href: href({ status: "open" }), label: "פתוחות", active: status === "open" },
+                  ...(Object.keys(TICKET_STATUS) as TicketStatus[]).map((s) => ({ href: href({ status: s }), label: TICKET_STATUS[s].label, active: status === s })),
+                  { href: href({ status: "all" }), label: "הכול", active: status === "all" },
+                ]}
+              />
+            )}
+            <FilterPill href={href({ assignee: assignee === "me" ? "" : "me" })} active={assignee === "me"}>
+              הפניות שלי
             </FilterPill>
-          ))}
-          <FilterPill href={href({ status: "all" })} active={status === "all"}>הכול</FilterPill>
-        </div>
-        )}
-        <div className="flex flex-wrap gap-2">
-          <FilterPill href={href({ assignee: "" })} active={!assignee}>כל האחראיות</FilterPill>
-          <FilterPill href={href({ assignee: "me" })} active={assignee === "me"}>הפניות שלי</FilterPill>
-          <FilterPill href={href({ assignee: "none" })} active={assignee === "none"}>ללא שיוך</FilterPill>
-          {(staff ?? []).map((s) => (
-            <FilterPill key={s.id} href={href({ assignee: s.id })} active={assignee === s.id}>
-              {s.full_name}
-            </FilterPill>
-          ))}
-        </div>
-      </div>
+            <FilterSelect
+              label="אחראית"
+              options={[
+                { label: "כולן", href: href({ assignee: "" }), active: !assignee || assignee === "me" },
+                { label: "ללא שיוך", href: href({ assignee: "none" }), active: assignee === "none" },
+                ...(staff ?? []).map((s) => ({ label: s.full_name, href: href({ assignee: s.id }), active: assignee === s.id })),
+              ]}
+            />
+          </>
+        }
+        actions={
+          <>
+            <ViewToggle
+              options={[
+                { href: href({ view: "" }), label: "☰ רשימה", active: view === "list" },
+                { href: href({ view: "board" }), label: "▦ קאנבאן", active: view === "board" },
+              ]}
+            />
+            <ButtonLink href="/tickets/new" className="min-h-9 px-3">
+              + פנייה
+            </ButtonLink>
+          </>
+        }
+      />
 
       {view === "board" ? (
         <TicketBoard rows={data ?? []} />

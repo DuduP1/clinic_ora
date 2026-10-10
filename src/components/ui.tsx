@@ -78,21 +78,38 @@ export function FilterPill({ href, active, children }: { href: string; active: b
   );
 }
 
-/** מתג תצוגה (רשימה / קאנבאן / לוח שנה) */
-export function ViewToggle({ options }: { options: { href: string; label: string; active: boolean }[] }) {
+/** מתג מקטעים קומפקטי – לתצוגה (רשימה/קאנבאן/לוח שנה) ולטווחי זמן */
+export function ViewToggle({ options, label = "תצוגה" }: { options: { href: string; label: string; active: boolean }[]; label?: string }) {
   return (
-    <div className="inline-flex rounded-full border border-line bg-surface p-1" role="tablist" aria-label="תצוגה">
+    <div className="inline-flex h-9 shrink-0 items-center rounded-full border border-line bg-surface p-0.5" role="tablist" aria-label={label}>
       {options.map((o) => (
         <Link
           key={o.href}
           href={o.href}
           role="tab"
           aria-selected={o.active}
-          className={`rounded-full px-4 py-1.5 text-sm transition ${o.active ? "bg-ink text-on-ink" : "text-ink hover:bg-sand"}`}
+          className={`flex h-full items-center whitespace-nowrap rounded-full px-3 text-sm transition ${o.active ? "bg-ink text-on-ink" : "text-ink hover:bg-sand"}`}
         >
           {o.label}
         </Link>
       ))}
+    </div>
+  );
+}
+
+/**
+ * סרגל עליון קומפקטי לעמודי רשימה: כותרת + מונה, מסננים, ומשמאל מתג תצוגה וכפתור פעולה.
+ * במסך רחב הכול בשורה אחת; בצר – נשבר לשורות קצרות.
+ */
+export function Toolbar({ title, count, filters, actions }: { title: string; count?: ReactNode; filters?: ReactNode; actions?: ReactNode }) {
+  return (
+    <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+      <div className="flex items-baseline gap-2">
+        <h1 className="text-xl font-bold">{title}</h1>
+        {count !== undefined && <span className="text-sm text-muted">{count}</span>}
+      </div>
+      {filters && <div className="flex flex-wrap items-center gap-2">{filters}</div>}
+      {actions && <div className="ms-auto flex items-center gap-2">{actions}</div>}
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { requireStaff } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { formatPhone, isValidPhone, normalizePhone } from "@/lib/phone";
 import { formatDateTime } from "@/lib/dates";
-import { Badge, ButtonLink, Card, EmptyState, inputClass, PageHeader } from "@/components/ui";
+import { Badge, ButtonLink, Card, EmptyState, Toolbar } from "@/components/ui";
 
 export const metadata = { title: "לקוחות · קליניקת אורה" };
 
@@ -41,16 +41,28 @@ export default async function CustomersPage({ searchParams }: PageProps<"/custom
 
   return (
     <>
-      <PageHeader
+      <Toolbar
         title="לקוחות"
-        subtitle={`${rows.length} לקוחות${q ? ` תואמות ל-"${q}"` : ""}`}
-        action={<ButtonLink href={newHref}>+ לקוחה חדשה</ButtonLink>}
+        count={`${rows.length}${q ? ` תואמות ל-"${q}"` : " לקוחות"}`}
+        filters={
+          <form className="flex gap-1.5">
+            <input
+              name="q"
+              type="search"
+              defaultValue={q}
+              placeholder="חיפוש לפי טלפון או שם"
+              aria-label="חיפוש לקוחה"
+              className="h-9 w-56 rounded-full border border-line bg-surface px-4 text-sm outline-none focus:border-rose focus:ring-2 focus:ring-rose/25 sm:w-72"
+            />
+            <button className="h-9 rounded-full bg-ink px-4 text-sm text-on-ink">חיפוש</button>
+          </form>
+        }
+        actions={
+          <ButtonLink href={newHref} className="min-h-9 px-3">
+            + לקוחה
+          </ButtonLink>
+        }
       />
-
-      <form className="mb-4 flex gap-2">
-        <input name="q" type="search" defaultValue={q} placeholder="חיפוש לפי טלפון או שם" className={`${inputClass} max-w-md`} />
-        <button className="min-h-11 rounded-lg bg-ink px-4 text-sm text-on-ink">חיפוש</button>
-      </form>
 
       {error && <p className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">טעינת הלקוחות נכשלה</p>}
 

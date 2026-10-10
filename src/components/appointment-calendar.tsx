@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type React from "react";
 import { AppointmentList, type AppointmentRow } from "@/components/appointment-list";
 import { ButtonLink, Card } from "@/components/ui";
 import { addDaysYmd, addMonths, dayLabel, formatTime, monthLabel, weekdayOf, ymdInTz } from "@/lib/dates";
@@ -52,19 +53,30 @@ export function AppointmentCalendar({
   for (const list of byDay.values()) list.sort((a, b) => a.starts_at.localeCompare(b.starts_at));
 
   const monthCount = rows.filter((a) => a.status !== "cancelled" && ymdInTz(new Date(a.starts_at)).startsWith(month)).length;
-  const dayRows = selectedDay ? (byDay.get(selectedDay) ?? []) : [];
+  // במחשב תמיד מוצג פאנל יום: היום הנבחר, או היום הנוכחי אם הוא בחודש המוצג
+  const panelDay = selectedDay ?? (today.startsWith(month) ? today : null);
+  const dayRows = panelDay ? (byDay.get(panelDay) ?? []) : [];
 
   return (
-    <div className="space-y-4">
-      <Card className="p-3 sm:p-4">
+    <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_19rem] lg:items-start">
+      <Card className="p-2.5 sm:p-3">
         {/* ניווט חודשים – ב-RTL "הבא" משמאל */}
-        <div className="mb-3 flex items-center justify-between gap-2">
+        <div className="mb-2 flex items-center justify-between gap-2">
           <Link href={href({ month: addMonths(month, -1), day: "" })} className="inline-flex min-h-10 items-center rounded-lg px-3 text-sm hover:bg-sand" aria-label="חודש קודם">
             → <span className="hidden sm:inline">&nbsp;חודש קודם</span>
           </Link>
           <div className="text-center">
-            <h2 className="text-lg font-bold">{monthLabel(month)}</h2>
-            <p className="text-xs text-muted">{monthCount} תורים פעילים</p>
+            <h2 className="text-lg leading-tight font-bold">{monthLabel(month)}</h2>
+            <p className="flex items-center justify-center gap-2 text-xs text-muted">
+              <span>{monthCount} תורים פעילים</span>
+              <span className="hidden items-center gap-2 sm:inline-flex">
+                {(Object.keys(APPOINTMENT_STATUS) as AppointmentRow["status"][]).map((s) => (
+                  <span key={s} className="inline-flex items-center gap-1">
+                    <span className={`h-2 w-2 rounded-full ${DOT[s]}`} /> {APPOINTMENT_STATUS[s].label}
+                  </span>
+                ))}
+              </span>
+            </p>
           </div>
           <div className="flex items-center gap-1">
             {month !== today.slice(0, 7) && (
@@ -84,7 +96,7 @@ export function AppointmentCalendar({
           ))}
         </div>
 
-        <div className="grid grid-cols-7">
+        <div className="grid grid-cols-7" style={{ "--weeks": days.length / 7 } as React.CSSProperties}>
           {days.map((d) => {
             const list = byDay.get(d) ?? [];
             const inMonth = d.startsWith(month);
@@ -97,7 +109,7 @@ export function AppointmentCalendar({
                 href={href({ day: isSelected ? "" : d, month })}
                 aria-label={`${dayLabel(d)}: ${list.length} תורים`}
                 aria-current={isToday ? "date" : undefined}
-                className={`flex min-h-16 flex-col gap-1 border-b border-l border-line p-1 transition hover:bg-sand/60 sm:min-h-24 sm:p-1.5 ${
+                className={`flex min-h-14 flex-col gap-1 border-b border-l border-line p-1 transition hover:bg-sand/60 sm:h-[max(5rem,calc((100dvh-15.5rem)/var(--weeks)))] sm:min-h-0 sm:overflow-hidden sm:p-1.5 ${
                   inMonth ? (isSaturday ? "bg-stone-50" : "bg-surface") : "bg-cream text-muted/60"
                 } ${isSelected ? "relative z-10 ring-2 ring-rose ring-inset" : ""}`}
               >
@@ -133,28 +145,26 @@ export function AppointmentCalendar({
           })}
         </div>
 
-        <div className="mt-3 flex flex-wrap gap-3 text-xs text-muted">
-          {(Object.keys(APPOINTMENT_STATUS) as AppointmentRow["status"][]).map((s) => (
-            <span key={s} className="inline-flex items-center gap-1.5">
-              <span className={`h-2 w-2 rounded-full ${DOT[s]}`} /> {APPOINTMENT_STATUS[s].label}
-            </span>
-          ))}
-        </div>
+
       </Card>
 
-      {selectedDay && (
-        <Card>
-          <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
-            <h2 className="text-lg font-semibold">
-              {dayLabel(selectedDay)} · {dayRows.length} תורים
-            </h2>
-            <ButtonLink href={`/appointments/new?date=${selectedDay}`} variant="secondary" className="min-h-9">
-              + תור ביום זה
-            </ButtonLink>
-          </div>
-          <AppointmentList rows={dayRows} timeOnly empty="אין תורים ביום זה" />
-        </Card>
-      )}
+      <Card className={`lg:sticky lg:top-20 lg:max-h-[calc(100dvh-6.5rem)] lg:overflow-y-auto ${panelDay ? "" : "hidden lg:block"}`}>
+        {panelDay ? (
+          <>
+            <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
+              <h2 className="font-semibold">
+                {dayLabel(panelDay)} · {dayRows.length} תורים
+              </h2>
+              <ButtonLink href={`/appointments/new?date=${panelDay}`} variant="secondary" className="min-h-9 px-3">
+                + תור ביום זה
+              </ButtonLink>
+            </div>
+            <AppointmentList rows={dayRows} timeOnly empty="אין תורים ביום זה" />
+          </>
+        ) : (
+          <p className="py-6 text-center text-sm text-muted">לחצי על יום בלוח כדי לראות את התורים שלו</p>
+        )}
+      </Card>
     </div>
   );
 }
