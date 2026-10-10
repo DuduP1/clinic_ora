@@ -2,6 +2,8 @@
 
 מערכת ניהול פנימית לקליניקת אורה: ניהול לקוחות, תורים ופניות שירות, ומסך סיכום ניהולי. כוללת גם API מאובטח לסוכן שירות AI.
 
+**כתובת המערכת:** https://ora-clinic-crm.vercel.app
+
 **סטאק:** Next.js 16 · Supabase (Postgres, Auth, RLS) · Tailwind CSS · Vercel
 
 ## מסמכים
