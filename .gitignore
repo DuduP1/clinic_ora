@@ -43,3 +43,6 @@ next-env.d.ts
 
 # demo credentials (local only)
 *.local.md
+
+.vercel
+.env*
