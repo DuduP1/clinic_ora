@@ -50,3 +50,8 @@ export function dayRange(offsetDays = 0, lengthDays = 1): { from: string; to: st
     to: zonedToDate(end.toISOString().slice(0, 10), "00:00").toISOString(),
   };
 }
+
+/** ISO של לפני N ימים */
+export function daysAgoIso(days: number): string {
+  return new Date(Date.now() - days * 24 * 3600e3).toISOString();
+}

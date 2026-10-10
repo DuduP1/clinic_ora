@@ -80,6 +80,29 @@ export async function setTicketStatus(id: string, status: TicketStatus): Promise
   return { ok: true, message: status === "closed" ? "הפנייה נסגרה" : status === "in_progress" ? "הפנייה נפתחה מחדש" : "הסטטוס עודכן" };
 }
 
+/**
+ * העברה בקאנבאן. מעבר ל"בטיפול" בלי אחראית משייך אוטומטית למשתמשת שגררה –
+ * כך נשמר הכלל "בטיפול מחייב אחראית" בלי לחסום את הגרירה.
+ */
+export async function moveTicket(id: string, status: TicketStatus): Promise<ActionResult> {
+  const me = await requireStaff();
+  if (!STATUSES.includes(status)) return { ok: false, error: "סטטוס לא תקין" };
+  const supabase = await createClient();
+  const { data: current } = await supabase.from("service_tickets").select("ticket_number, assigned_to").eq("id", id).maybeSingle();
+  if (!current) return { ok: false, error: "הפנייה לא נמצאה" };
+
+  const selfAssign = status === "in_progress" && !current.assigned_to;
+  const { error } = await supabase
+    .from("service_tickets")
+    .update(selfAssign ? { status, assigned_to: me.id } : { status })
+    .eq("id", id);
+  if (error) return { ok: false, error: "העדכון נכשל, נסי שוב" };
+
+  revalidatePath("/", "layout");
+  const label = status === "new" ? "חדשה" : status === "in_progress" ? "בטיפול" : "נסגרה";
+  return { ok: true, message: `פנייה #${current.ticket_number} → ${label}${selfAssign ? " (שויכה אלייך)" : ""}` };
+}
+
 export async function deleteTicket(id: string): Promise<ActionResult> {
   await requireAdmin();
   const supabase = await createClient();
