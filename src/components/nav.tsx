@@ -3,14 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-type Item = { href: string; label: string; icon: string; adminOnly?: boolean };
+/** label – לסרגל התחתון בנייד; sideLabel – לתפריט הצד (אם שונה) */
+type Item = { href: string; label: string; sideLabel?: string; icon: string; adminOnly?: boolean; desktopOnly?: boolean; hint?: string };
 
 const ITEMS: Item[] = [
   { href: "/", label: "ראשי", icon: "M3 12l9-8 9 8M5 10v10h5v-6h4v6h5V10" },
   { href: "/customers", label: "לקוחות", icon: "M16 19v-1a4 4 0 0 0-8 0v1M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6" },
   { href: "/appointments", label: "תורים", icon: "M7 3v3M17 3v3M4 8h16M5 5h14v15H5z" },
-  { href: "/tickets", label: "פניות", icon: "M4 5h16v11H8l-4 4z" },
-  { href: "/staff", label: "צוות", icon: "M17 20v-1a4 4 0 0 0-3-3.87M7 20v-1a4 4 0 0 1 3-3.87M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6", adminOnly: true },
+  { href: "/tickets", label: "פניות", sideLabel: "פניות שירות", icon: "M4 5h16v11H8l-4 4z" },
+  { href: "/staff", label: "צוות", sideLabel: "ניהול צוות", icon: "M17 20v-1a4 4 0 0 0-3-3.87M7 20v-1a4 4 0 0 1 3-3.87M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6", adminOnly: true },
+  // בנייד העזרה נמצאת בתפריט המשתמשת (הסרגל התחתון מוגבל ל-4 פריטים)
+  { href: "/help", label: "עזרה", sideLabel: "עזרה ואודות", icon: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01", desktopOnly: true, hint: "?" },
 ];
 
 function Icon({ d }: { d: string }) {
@@ -40,7 +43,8 @@ export function SideNav({ isAdmin, newTickets }: { isAdmin: boolean; newTickets:
           }`}
         >
           <Icon d={i.icon} />
-          <span className="flex-1">{i.label === "צוות" ? "ניהול צוות" : i.label === "פניות" ? "פניות שירות" : i.label}</span>
+          <span className="flex-1">{i.sideLabel ?? i.label}</span>
+          {i.hint && <kbd className="rounded border border-line px-1.5 text-[11px] text-muted">{i.hint}</kbd>}
           {i.href === "/tickets" && newTickets > 0 && (
             <span className="rounded-full bg-sky-600 px-2 py-0.5 text-xs font-semibold text-white">{newTickets}</span>
           )}
@@ -56,7 +60,7 @@ export function BottomNav({ newTickets }: { newTickets: number }) {
   return (
     <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden">
       <ul className="grid grid-cols-4">
-        {ITEMS.filter((i) => !i.adminOnly).map((i) => (
+        {ITEMS.filter((i) => !i.adminOnly && !i.desktopOnly).map((i) => (
           <li key={i.href}>
             <Link
               href={i.href}

@@ -28,11 +28,6 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
           <span className="font-bold">קליניקת אורה</span>
         </Link>
         <SideNav isAdmin={isAdmin} newTickets={newTickets} />
-        <Link href="/help" className="mt-auto flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted hover:bg-sand">
-          <span className="flex h-5 w-5 items-center justify-center rounded-full border border-current text-xs">?</span>
-          עזרה ואודות
-          <kbd className="ms-auto rounded border border-line px-1.5 text-[11px]">?</kbd>
-        </Link>
       </aside>
 
       <div className="flex min-w-0 flex-col">
