@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { requireStaff } from "@/lib/auth";
 import { ymdInTz } from "@/lib/dates";
 import { SHORTCUTS, type Shortcut } from "@/lib/shortcuts";
-import { Badge, Card } from "@/components/ui";
+import { Badge } from "@/components/ui";
 
 export const metadata = { title: "עזרה · קליניקת אורה" };
 
@@ -47,12 +47,17 @@ function Keys({ combos }: { combos: Shortcut["keys"] }) {
 
 function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
   return (
-    <Card className="scroll-mt-20">
-      <h2 id={id} className="mb-3 text-lg font-bold">
+    // העוגן על הכרטיס כולו; scroll-margin = גובה הכותרת הדביקה (61px) + מרווח, כדי שהכותרת לא תוסתר
+    <section
+      id={id}
+      aria-labelledby={`${id}-title`}
+      className="scroll-mt-[4.75rem] rounded-2xl border border-line bg-surface p-4 shadow-sm transition-shadow duration-700 target:ring-2 target:ring-rose/50 sm:p-5"
+    >
+      <h2 id={`${id}-title`} className="mb-3 text-lg font-bold">
         {title}
       </h2>
       <div className="space-y-3 text-sm leading-relaxed">{children}</div>
-    </Card>
+    </section>
   );
 }
 
@@ -76,7 +81,7 @@ export default async function HelpPage() {
         </ul>
       </nav>
 
-      <div className="space-y-4">
+      <div className="space-y-4 pb-[60dvh]">
         <Section id="start" title="התחלה מהירה">
           <p>
             המערכת מרכזת במקום אחד את <b>הלקוחות</b>, <b>התורים</b> ו<b>פניות השירות</b> של הקליניקה. כל לקוחה מזוהה לפי מספר הטלפון שלה, ואין
