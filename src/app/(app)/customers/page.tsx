@@ -43,19 +43,17 @@ export default async function CustomersPage({ searchParams }: PageProps<"/custom
     <>
       <Toolbar
         title="לקוחות"
-        count={`${rows.length}${q ? ` תואמות ל-"${q}"` : " לקוחות"}`}
-        filters={
-          <form className="flex gap-1.5">
-            <input
-              name="q"
-              type="search"
-              defaultValue={q}
-              placeholder="חיפוש לפי טלפון או שם"
-              aria-label="חיפוש לקוחה"
-              className="h-9 w-56 rounded-full border border-line bg-surface px-4 text-sm outline-none focus:border-rose focus:ring-2 focus:ring-rose/25 sm:w-72"
-            />
-            <button className="h-9 rounded-full bg-ink px-4 text-sm text-on-ink">חיפוש</button>
-          </form>
+        count={
+          q ? (
+            <>
+              {rows.length} תואמות ל-&quot;{q}&quot; ·{" "}
+              <Link href="/customers" className="text-rose-dark hover:underline">
+                ניקוי חיפוש
+              </Link>
+            </>
+          ) : (
+            `${rows.length} לקוחות`
+          )
         }
         actions={
           <ButtonLink href={newHref} className="min-h-9 px-3">

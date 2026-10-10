@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { Suspense } from "react";
+import { QuickSearch } from "@/components/quick-search";
 import { requireStaff } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { ROLE_LABEL } from "@/lib/labels";
@@ -30,16 +32,11 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
       <div className="flex min-w-0 flex-col">
         <header className="sticky top-0 z-20 border-b border-line bg-cream/95 backdrop-blur">
           <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-2.5">
-            <form action="/customers" className="min-w-0 flex-1">
-              <input
-                name="q"
-                type="search"
-                inputMode="tel"
-                placeholder="חיפוש מהיר לפי טלפון…"
-                aria-label="חיפוש לקוחה לפי טלפון"
-                className="h-10 w-full max-w-sm rounded-full border border-line bg-surface px-4 text-sm outline-none focus:border-rose focus:ring-2 focus:ring-rose/25"
-              />
-            </form>
+            <div className="min-w-0 flex-1">
+              <Suspense>
+                <QuickSearch />
+              </Suspense>
+            </div>
             <ThemeToggle />
             <details className="relative">
               <summary className="flex min-h-10 cursor-pointer list-none items-center gap-2 rounded-full px-2 hover:bg-sand">
