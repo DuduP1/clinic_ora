@@ -55,3 +55,30 @@ export function dayRange(offsetDays = 0, lengthDays = 1): { from: string; to: st
 export function daysAgoIso(days: number): string {
   return new Date(Date.now() - days * 24 * 3600e3).toISOString();
 }
+
+// ---------- עזרי לוח שנה (מחרוזות YYYY-MM-DD, חישוב בצהרי UTC כדי לא להיתקל במעברי שעון) ----------
+const noon = (ymd: string) => new Date(`${ymd}T12:00:00Z`);
+
+export function addDaysYmd(ymd: string, days: number): string {
+  const d = noon(ymd);
+  d.setUTCDate(d.getUTCDate() + days);
+  return d.toISOString().slice(0, 10);
+}
+
+/** "2026-10" ± n חודשים */
+export function addMonths(month: string, n: number): string {
+  const [y, m] = month.split("-").map(Number);
+  const d = new Date(Date.UTC(y, m - 1 + n, 1, 12));
+  return d.toISOString().slice(0, 7);
+}
+
+/** 0 = ראשון … 6 = שבת */
+export const weekdayOf = (ymd: string) => noon(ymd).getUTCDay();
+
+/** "אוקטובר 2026" */
+export const monthLabel = (month: string) =>
+  new Intl.DateTimeFormat("he-IL", { month: "long", year: "numeric", timeZone: "UTC" }).format(noon(`${month}-01`));
+
+/** "יום שישי, 16 באוקטובר" */
+export const dayLabel = (ymd: string) =>
+  new Intl.DateTimeFormat("he-IL", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" }).format(noon(ymd));

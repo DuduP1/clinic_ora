@@ -1,11 +1,10 @@
-import Link from "next/link";
 import { requireStaff } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { TICKET_STATUS, type TicketStatus } from "@/lib/labels";
 import { TicketList, TICKET_SELECT, type TicketRow } from "@/components/ticket-list";
 import { TicketBoard } from "@/components/ticket-board";
 import { daysAgoIso } from "@/lib/dates";
-import { ButtonLink, Card, FilterPill, PageHeader } from "@/components/ui";
+import { ButtonLink, Card, FilterPill, PageHeader, ViewToggle } from "@/components/ui";
 
 export const metadata = { title: "פניות שירות · קליניקת אורה" };
 
@@ -46,14 +45,12 @@ export default async function TicketsPage({ searchParams }: PageProps<"/tickets"
       <PageHeader title="פניות שירות" subtitle={`${data?.length ?? 0} פניות`} action={<ButtonLink href="/tickets/new">+ פנייה חדשה</ButtonLink>} />
 
       <div className="mb-4 space-y-2">
-        <div className="inline-flex rounded-full border border-line bg-white p-1" role="tablist" aria-label="תצוגה">
-          <Link href={href({ view: "" })} role="tab" aria-selected={view === "list"} className={`rounded-full px-4 py-1.5 text-sm ${view === "list" ? "bg-ink text-white" : "text-ink hover:bg-sand"}`}>
-            ☰ רשימה
-          </Link>
-          <Link href={href({ view: "board" })} role="tab" aria-selected={view === "board"} className={`rounded-full px-4 py-1.5 text-sm ${view === "board" ? "bg-ink text-white" : "text-ink hover:bg-sand"}`}>
-            ▦ קאנבאן
-          </Link>
-        </div>
+        <ViewToggle
+          options={[
+            { href: href({ view: "" }), label: "☰ רשימה", active: view === "list" },
+            { href: href({ view: "board" }), label: "▦ קאנבאן", active: view === "board" },
+          ]}
+        />
         {view === "list" && (
         <div className="flex flex-wrap gap-2">
           <FilterPill href={href({ status: "open" })} active={status === "open"}>פתוחות</FilterPill>

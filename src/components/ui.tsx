@@ -77,3 +77,22 @@ export function FilterPill({ href, active, children }: { href: string; active: b
     </Link>
   );
 }
+
+/** מתג תצוגה (רשימה / קאנבאן / לוח שנה) */
+export function ViewToggle({ options }: { options: { href: string; label: string; active: boolean }[] }) {
+  return (
+    <div className="inline-flex rounded-full border border-line bg-white p-1" role="tablist" aria-label="תצוגה">
+      {options.map((o) => (
+        <Link
+          key={o.href}
+          href={o.href}
+          role="tab"
+          aria-selected={o.active}
+          className={`rounded-full px-4 py-1.5 text-sm transition ${o.active ? "bg-ink text-white" : "text-ink hover:bg-sand"}`}
+        >
+          {o.label}
+        </Link>
+      ))}
+    </div>
+  );
+}
