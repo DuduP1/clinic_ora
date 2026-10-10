@@ -1,16 +1,80 @@
 @import "tailwindcss";
 
+/* מצב כהה נשלט ע"י <html data-theme="dark"> (כפתור בממשק, נשמר בעוגייה) */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* טוקנים סמנטיים – הערכים מתחלפים לפי ערכת הנושא */
 @theme inline {
   --font-sans: var(--font-heebo), Arial, sans-serif;
 
-  /* פלטת הקליניקה */
-  --color-cream: #faf7f4;
-  --color-sand: #efe6dd;
-  --color-ink: #2e2a28;
-  --color-muted: #7a716c;
-  --color-line: #e4dbd2;
-  --color-rose: #b5838d;
-  --color-rose-dark: #96636d;
+  --color-cream: var(--c-cream); /* רקע עמוד */
+  --color-surface: var(--c-surface); /* כרטיסים, טפסים */
+  --color-sand: var(--c-sand); /* רקע משני / hover */
+  --color-ink: var(--c-ink); /* טקסט ראשי */
+  --color-on-ink: var(--c-on-ink); /* טקסט על רקע ink */
+  --color-muted: var(--c-muted);
+  --color-line: var(--c-line);
+  --color-rose: var(--c-rose);
+  --color-rose-dark: var(--c-rose-dark);
+}
+
+:root {
+  color-scheme: light;
+  --c-cream: #faf7f4;
+  --c-surface: #ffffff;
+  --c-sand: #efe6dd;
+  --c-ink: #2e2a28;
+  --c-on-ink: #ffffff;
+  --c-muted: #7a716c;
+  --c-line: #e4dbd2;
+  --c-rose: #b5838d;
+  --c-rose-dark: #96636d;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark; /* תאריכונים, תיבות בחירה וגלילה בגוון כהה */
+  --c-cream: #171413;
+  --c-surface: #221e1c;
+  --c-sand: #2e2826;
+  --c-ink: #ede7e2;
+  --c-on-ink: #171413;
+  --c-muted: #a69c96;
+  --c-line: #3b3431;
+  --c-rose: #c48f99;
+  --c-rose-dark: #e2b0ba;
+
+  /* גווני הסטטוסים: רקעים בהירים הופכים לגוונים כהים, טקסט כהה הופך לבהיר */
+  --color-red-50: #3a1b1b;
+  --color-red-100: #4a2020;
+  --color-red-200: #6b2b2b;
+  --color-red-300: #8c3636;
+  --color-red-400: #b34848;
+  --color-red-700: #fca5a5;
+  --color-red-800: #fecaca;
+
+  --color-sky-50: #10283a;
+  --color-sky-100: #133349;
+  --color-sky-200: #1e4a67;
+  --color-sky-700: #7dd3fc;
+  --color-sky-800: #bae6fd;
+  --color-sky-900: #e0f2fe;
+
+  --color-emerald-50: #0f2e24;
+  --color-emerald-100: #13392d;
+  --color-emerald-200: #1c5441;
+  --color-emerald-800: #a7f3d0;
+  --color-emerald-900: #d1fae5;
+
+  --color-amber-100: #3d2e10;
+  --color-amber-200: #5c4516;
+  --color-amber-700: #fcd34d;
+  --color-amber-800: #fde68a;
+
+  --color-stone-50: #1d1a19;
+  --color-stone-100: #2e2826;
+  --color-stone-200: #3b3431;
+  --color-stone-500: #a8a29e;
+  --color-stone-600: #c4bdb8;
 }
 
 body {

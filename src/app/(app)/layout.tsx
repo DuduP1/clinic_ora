@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { Toaster } from "sonner";
 import { requireStaff } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { ROLE_LABEL } from "@/lib/labels";
 import { BottomNav, SideNav } from "@/components/nav";
+import { ThemedToaster, ThemeToggle } from "@/components/theme";
 import { signOut } from "@/app/login/actions";
 
 export default async function AppLayout({ children }: LayoutProps<"/">) {
@@ -19,7 +19,7 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
   return (
     <div className="min-h-screen md:grid md:grid-cols-[15rem_1fr]">
       {/* תפריט צד – מחשב */}
-      <aside className="hidden border-l border-line bg-white md:flex md:min-h-screen md:flex-col md:gap-6 md:p-4">
+      <aside className="hidden border-l border-line bg-surface md:flex md:min-h-screen md:flex-col md:gap-6 md:p-4">
         <Link href="/" className="flex items-center gap-2 px-2 pt-1">
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-rose/15 font-bold text-rose-dark">א</span>
           <span className="font-bold">קליניקת אורה</span>
@@ -37,12 +37,13 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
                 inputMode="tel"
                 placeholder="חיפוש מהיר לפי טלפון…"
                 aria-label="חיפוש לקוחה לפי טלפון"
-                className="h-10 w-full max-w-sm rounded-full border border-line bg-white px-4 text-sm outline-none focus:border-rose focus:ring-2 focus:ring-rose/25"
+                className="h-10 w-full max-w-sm rounded-full border border-line bg-surface px-4 text-sm outline-none focus:border-rose focus:ring-2 focus:ring-rose/25"
               />
             </form>
+            <ThemeToggle />
             <details className="relative">
               <summary className="flex min-h-10 cursor-pointer list-none items-center gap-2 rounded-full px-2 hover:bg-sand">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ink text-sm text-white">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ink text-sm text-on-ink">
                   {me.full_name.charAt(0)}
                 </span>
                 <span className="hidden text-right leading-tight sm:block">
@@ -50,7 +51,7 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
                   <span className="block text-xs text-muted">{ROLE_LABEL[me.role]}</span>
                 </span>
               </summary>
-              <div className="absolute left-0 mt-2 w-48 rounded-xl border border-line bg-white p-1.5 shadow-lg">
+              <div className="absolute left-0 mt-2 w-48 rounded-xl border border-line bg-surface p-1.5 shadow-lg">
                 <p className="px-3 py-2 text-xs text-muted sm:hidden">
                   {me.full_name} · {ROLE_LABEL[me.role]}
                 </p>
@@ -71,7 +72,7 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
       </div>
 
       <BottomNav newTickets={newTickets} />
-      <Toaster dir="rtl" position="top-center" richColors closeButton />
+      <ThemedToaster />
     </div>
   );
 }

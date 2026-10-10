@@ -98,7 +98,7 @@ export function AppointmentCalendar({
                 aria-label={`${dayLabel(d)}: ${list.length} תורים`}
                 aria-current={isToday ? "date" : undefined}
                 className={`flex min-h-16 flex-col gap-1 border-b border-l border-line p-1 transition hover:bg-sand/60 sm:min-h-24 sm:p-1.5 ${
-                  inMonth ? (isSaturday ? "bg-stone-50" : "bg-white") : "bg-cream text-muted/60"
+                  inMonth ? (isSaturday ? "bg-stone-50" : "bg-surface") : "bg-cream text-muted/60"
                 } ${isSelected ? "relative z-10 ring-2 ring-rose ring-inset" : ""}`}
               >
                 <span

@@ -49,7 +49,7 @@ export default async function CustomersPage({ searchParams }: PageProps<"/custom
 
       <form className="mb-4 flex gap-2">
         <input name="q" type="search" defaultValue={q} placeholder="חיפוש לפי טלפון או שם" className={`${inputClass} max-w-md`} />
-        <button className="min-h-11 rounded-lg bg-ink px-4 text-sm text-white">חיפוש</button>
+        <button className="min-h-11 rounded-lg bg-ink px-4 text-sm text-on-ink">חיפוש</button>
       </form>
 
       {error && <p className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">טעינת הלקוחות נכשלה</p>}
@@ -100,7 +100,7 @@ export default async function CustomersPage({ searchParams }: PageProps<"/custom
           <ul className="space-y-2 md:hidden">
             {rows.map((c) => (
               <li key={c.id}>
-                <Link href={`/customers/${c.id}`} className="block rounded-xl border border-line bg-white p-4 shadow-sm active:bg-sand">
+                <Link href={`/customers/${c.id}`} className="block rounded-xl border border-line bg-surface p-4 shadow-sm active:bg-sand">
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-semibold">{c.full_name}</span>
                     {c.open_tickets > 0 && <Badge tone="orange">{c.open_tickets} פתוחות</Badge>}

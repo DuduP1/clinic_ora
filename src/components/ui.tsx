@@ -3,7 +3,7 @@ import type { ComponentProps, ReactNode } from "react";
 import { TONE_CLASS, type Tone } from "@/lib/labels";
 
 export const inputClass =
-  "w-full min-h-11 rounded-lg border border-line bg-white px-3 py-2 text-ink outline-none transition focus:border-rose focus:ring-2 focus:ring-rose/25 disabled:bg-stone-50";
+  "w-full min-h-11 rounded-lg border border-line bg-surface px-3 py-2 text-ink outline-none transition focus:border-rose focus:ring-2 focus:ring-rose/25 disabled:bg-stone-50";
 
 export function Field({ label, hint, children }: { label: string; hint?: ReactNode; children: ReactNode }) {
   return (
@@ -19,8 +19,8 @@ const btnBase =
   "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition disabled:opacity-60";
 export const btn = {
   primary: `${btnBase} bg-rose text-white hover:bg-rose-dark`,
-  secondary: `${btnBase} border border-line bg-white text-ink hover:bg-sand`,
-  danger: `${btnBase} border border-red-200 bg-white text-red-700 hover:bg-red-50`,
+  secondary: `${btnBase} border border-line bg-surface text-ink hover:bg-sand`,
+  danger: `${btnBase} border border-red-200 bg-surface text-red-700 hover:bg-red-50`,
   ghost: `${btnBase} text-ink hover:bg-sand`,
 };
 
@@ -57,7 +57,7 @@ export function PageHeader({ title, subtitle, action }: { title: string; subtitl
 }
 
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <section className={`rounded-2xl border border-line bg-white p-4 shadow-sm sm:p-5 ${className}`}>{children}</section>;
+  return <section className={`rounded-2xl border border-line bg-surface p-4 shadow-sm sm:p-5 ${className}`}>{children}</section>;
 }
 
 export function EmptyState({ children }: { children: ReactNode }) {
@@ -70,7 +70,7 @@ export function FilterPill({ href, active, children }: { href: string; active: b
     <Link
       href={href}
       className={`inline-flex min-h-9 items-center rounded-full px-3.5 text-sm transition ${
-        active ? "bg-ink text-white" : "border border-line bg-white text-ink hover:bg-sand"
+        active ? "bg-ink text-on-ink" : "border border-line bg-surface text-ink hover:bg-sand"
       }`}
     >
       {children}
@@ -81,14 +81,14 @@ export function FilterPill({ href, active, children }: { href: string; active: b
 /** מתג תצוגה (רשימה / קאנבאן / לוח שנה) */
 export function ViewToggle({ options }: { options: { href: string; label: string; active: boolean }[] }) {
   return (
-    <div className="inline-flex rounded-full border border-line bg-white p-1" role="tablist" aria-label="תצוגה">
+    <div className="inline-flex rounded-full border border-line bg-surface p-1" role="tablist" aria-label="תצוגה">
       {options.map((o) => (
         <Link
           key={o.href}
           href={o.href}
           role="tab"
           aria-selected={o.active}
-          className={`rounded-full px-4 py-1.5 text-sm transition ${o.active ? "bg-ink text-white" : "text-ink hover:bg-sand"}`}
+          className={`rounded-full px-4 py-1.5 text-sm transition ${o.active ? "bg-ink text-on-ink" : "text-ink hover:bg-sand"}`}
         >
           {o.label}
         </Link>

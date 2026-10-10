@@ -81,7 +81,7 @@ export function TicketBoard({ rows }: { rows: TicketRow[] }) {
           >
             <header className="mb-3 flex items-center justify-between px-1">
               <h2 className="font-semibold">{st.label}</h2>
-              <span className="rounded-full bg-white px-2 py-0.5 text-xs font-semibold text-muted">{list.length}</span>
+              <span className="rounded-full bg-surface px-2 py-0.5 text-xs font-semibold text-muted">{list.length}</span>
             </header>
 
             <ul className="flex min-h-24 flex-1 flex-col gap-2">
@@ -100,7 +100,7 @@ export function TicketBoard({ rows }: { rows: TicketRow[] }) {
                       setDragId(t.id);
                     }}
                     onDragEnd={() => setDragId(null)}
-                    className={`cursor-grab rounded-xl border bg-white p-3 shadow-sm transition active:cursor-grabbing ${
+                    className={`cursor-grab rounded-xl border bg-surface p-3 shadow-sm transition active:cursor-grabbing ${
                       stale ? "border-red-300" : "border-line"
                     } ${dragId === t.id ? "opacity-50" : ""}`}
                   >

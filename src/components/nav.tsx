@@ -54,7 +54,7 @@ export function SideNav({ isAdmin, newTickets }: { isAdmin: boolean; newTickets:
 export function BottomNav({ newTickets }: { newTickets: number }) {
   const isActive = useActive();
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden">
       <ul className="grid grid-cols-4">
         {ITEMS.filter((i) => !i.adminOnly).map((i) => (
           <li key={i.href}>

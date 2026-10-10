@@ -68,7 +68,7 @@ export default async function DashboardPage({ searchParams }: PageProps<"/">) {
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {stats.map((s) => (
-          <Link key={s.label} href={s.href} className="rounded-2xl border border-line bg-white p-4 shadow-sm transition hover:border-rose/50">
+          <Link key={s.label} href={s.href} className="rounded-2xl border border-line bg-surface p-4 shadow-sm transition hover:border-rose/50">
             <div className={`text-3xl font-bold ${s.tone}`}>{s.value}</div>
             <div className="mt-1 text-sm text-muted">{s.label}</div>
           </Link>
