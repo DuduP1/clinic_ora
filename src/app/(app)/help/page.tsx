@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { requireStaff } from "@/lib/auth";
@@ -243,7 +244,7 @@ export default async function HelpPage() {
 
         <Section id="about" title="אודות">
           <div className="flex flex-wrap items-center gap-4">
-            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-rose/15 text-2xl font-bold text-rose-dark">א</span>
+            <Image src="/logo-mark.png" alt="" width={64} height={37} className="h-auto w-16 shrink-0" />
             <div>
               <p className="text-base font-semibold">CRM קליניקת אורה</p>
               <p className="text-muted">מערכת לניהול לקוחות, תורים ופניות שירות · גרסה 1.0</p>

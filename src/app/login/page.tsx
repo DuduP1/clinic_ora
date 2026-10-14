@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { LoginForm } from "./login-form";
 import { ThemeToggle } from "@/components/theme";
 
@@ -10,11 +11,12 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
       <ThemeToggle className="absolute top-4 left-4" />
       <div className="w-full max-w-sm rounded-2xl border border-line bg-surface p-6 shadow-sm sm:p-8">
         <div className="mb-6 text-center">
-          <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-rose/15 text-2xl font-bold text-rose-dark">
-            א
-          </div>
-          <h1 className="text-2xl font-bold">קליניקת אורה</h1>
-          <p className="text-sm text-muted">מערכת ניהול לקוחות</p>
+          <h1>
+            {/* בתצוגה כהה – גרסה מוארת של הלוגו, כדי שהכיתוב יישאר קריא */}
+            <Image src="/logo-full.png" alt="קליניקת אורה" width={398} height={263} priority className="mx-auto h-auto w-56 dark:hidden" />
+            <Image src="/logo-full-dark.png" alt="קליניקת אורה" width={398} height={263} priority className="mx-auto hidden h-auto w-56 dark:block" />
+          </h1>
+          <p className="mt-2 text-sm text-muted">מערכת ניהול לקוחות</p>
         </div>
         {error === "inactive" && (
           <p className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">המשתמשת אינה פעילה במערכת.</p>
