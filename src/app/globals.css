@@ -16,6 +16,10 @@
   --color-line: var(--c-line);
   --color-rose: var(--c-rose);
   --color-rose-dark: var(--c-rose-dark);
+  /* פעולה ראשית – גוון כהה מספיק לטקסט לבן (ניגודיות ≥4.5:1) */
+  --color-primary: var(--c-primary);
+  --color-primary-hover: var(--c-primary-hover);
+  --color-on-primary: var(--c-on-primary);
 }
 
 :root {
@@ -25,10 +29,13 @@
   --c-sand: #efe6dd;
   --c-ink: #2e2a28;
   --c-on-ink: #ffffff;
-  --c-muted: #7a716c;
+  --c-muted: #736a65;
   --c-line: #e4dbd2;
   --c-rose: #b5838d;
   --c-rose-dark: #96636d;
+  --c-primary: #96636d;
+  --c-primary-hover: #8a5862;
+  --c-on-primary: #ffffff;
 }
 
 [data-theme="dark"] {
@@ -42,6 +49,9 @@
   --c-line: #3b3431;
   --c-rose: #c48f99;
   --c-rose-dark: #e2b0ba;
+  --c-primary: #c48f99;
+  --c-primary-hover: #d3a1ab;
+  --c-on-primary: #171413;
 
   /* גווני הסטטוסים: רקעים בהירים הופכים לגוונים כהים, טקסט כהה הופך לבהיר */
   --color-red-50: #3a1b1b;
@@ -81,6 +91,32 @@ body {
   background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-sans);
+}
+
+/* משטחי דפדפן בצבעי המערכת: סימון טקסט, סמן, פקדים, פוקוס וגלילה */
+::selection {
+  background: color-mix(in oklab, var(--color-rose) 30%, transparent);
+  color: var(--color-ink);
+}
+html {
+  caret-color: var(--color-rose-dark);
+  accent-color: var(--color-rose);
+  scrollbar-color: var(--color-line) transparent;
+}
+:focus-visible {
+  outline: 2px solid var(--color-rose);
+  outline-offset: 2px;
+}
+/* שדות קלט מסמנים פוקוס בעצמם (מסגרת + טבעת) */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+}
+h1,
+h2,
+h3 {
+  text-wrap: balance;
 }
 
 /* מניעת זום אוטומטי בשדות קלט ב-iOS */

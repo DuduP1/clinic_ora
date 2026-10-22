@@ -45,7 +45,7 @@ export function SideNav({ isAdmin, newTickets }: { isAdmin: boolean; newTickets:
           <Icon d={i.icon} />
           <span className="flex-1">{i.sideLabel ?? i.label}</span>
           {i.href === "/tickets" && newTickets > 0 && (
-            <span className="rounded-full bg-sky-600 px-2 py-0.5 text-xs font-semibold text-white">{newTickets}</span>
+            <span className="rounded-full bg-sky-100 px-2 py-0.5 text-xs font-semibold text-sky-800 tabular-nums ring-1 ring-sky-200 ring-inset">{newTickets}</span>
           )}
         </Link>
       ))}
@@ -70,7 +70,7 @@ export function BottomNav({ newTickets }: { newTickets: number }) {
               <Icon d={i.icon} />
               {i.label}
               {i.href === "/tickets" && newTickets > 0 && (
-                <span className="absolute top-1.5 left-[calc(50%+4px)] rounded-full bg-sky-600 px-1.5 text-[10px] font-semibold leading-4 text-white">
+                <span className="absolute top-1.5 left-[calc(50%+4px)] rounded-full bg-sky-100 px-1.5 text-[10px] font-semibold leading-4 text-sky-800 tabular-nums ring-1 ring-sky-200 ring-inset">
                   {newTickets}
                 </span>
               )}

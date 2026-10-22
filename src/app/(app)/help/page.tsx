@@ -5,6 +5,15 @@ import { requireStaff } from "@/lib/auth";
 import { ymdInTz } from "@/lib/dates";
 import { SHORTCUTS, type Shortcut } from "@/lib/shortcuts";
 import { Badge } from "@/components/ui";
+import { Icon } from "@/components/icons";
+
+function Check() {
+  return (
+    <span className="inline-flex text-emerald-800" aria-label="כן">
+      <Icon name="check" />
+    </span>
+  );
+}
 
 export const metadata = { title: "עזרה · קליניקת אורה" };
 
@@ -154,7 +163,7 @@ export default async function HelpPage() {
               פנייה <Badge tone="red">ללא שיוך מעל 24 שעות</Badge> מסומנת באדום, וגם מופיעה כהתראה במסך הראשי.
             </li>
             <li>
-              פניות שפתח סוכן ה-AI מסומנות ב-<Badge tone="rose">🤖 סוכן AI</Badge>. הן מגיעות כ&quot;חדשה&quot; ללא אחראית.
+              פניות שפתח סוכן ה-AI מסומנות ב-<Badge tone="rose"><Icon name="bot" className="h-3.5 w-3.5" />סוכן AI</Badge>. הן מגיעות כ&quot;חדשה&quot; ללא אחראית.
             </li>
             <li>אפשר לפתוח מחדש פנייה שנסגרה. היא חוזרת לבטיפול.</li>
           </ul>
@@ -166,7 +175,7 @@ export default async function HelpPage() {
           </p>
           <ul className="list-disc space-y-1 ps-5">
             <li>
-              אחרי טיפול מסמנים <b>✓ בוצע</b>. בביטול או בהברזה מסמנים <b>בוטל</b>, ואת הסיבה כותבים בהערות (דרך &quot;עריכה&quot;).
+              אחרי טיפול מסמנים <b>בוצע</b>. בביטול או בהברזה מסמנים <b>בוטל</b>, ואת הסיבה כותבים בהערות (דרך &quot;עריכה&quot;).
             </li>
             <li>
               <b>לוח שנה:</b> מדפדפים בחצים בין חודשים, ו&quot;היום&quot; מחזיר לחודש הנוכחי. לחיצה על יום מציגה את התורים שלו, עם כפתור <b>+ תור ביום זה</b>
@@ -197,8 +206,8 @@ export default async function HelpPage() {
                 ].map(([a, admin, staff]) => (
                   <tr key={String(a)} className="border-b border-line last:border-0">
                     <td className="py-2">{a}</td>
-                    <td className="py-2 text-center">{admin ? "✓" : "—"}</td>
-                    <td className="py-2 text-center">{staff ? "✓" : "—"}</td>
+                    <td className="py-2 text-center">{admin ? <Check /> : "—"}</td>
+                    <td className="py-2 text-center">{staff ? <Check /> : "—"}</td>
                   </tr>
                 ))}
               </tbody>

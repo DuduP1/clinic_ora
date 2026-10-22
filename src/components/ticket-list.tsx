@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Badge, EmptyState } from "@/components/ui";
 import { isStale, SOURCE_LABEL, TICKET_STATUS, type TicketSource, type TicketStatus } from "@/lib/labels";
 import { formatDateTime } from "@/lib/dates";
+import { Icon } from "@/components/icons";
 
 export type TicketRow = {
   id: string;
@@ -31,7 +32,7 @@ export function TicketList({ rows, showCustomer = true, empty }: { rows: TicketR
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-sm text-muted">#{t.ticket_number}</span>
                 <Badge tone={st.tone}>{st.label}</Badge>
-                {t.source === "agent" && <Badge tone="rose">🤖 {SOURCE_LABEL.agent}</Badge>}
+                {t.source === "agent" && <Badge tone="rose"><Icon name="bot" className="h-3.5 w-3.5" />{SOURCE_LABEL.agent}</Badge>}
                 {stale && <Badge tone="red">ללא שיוך מעל 24 שעות</Badge>}
                 <span className="ms-auto text-xs text-muted">{formatDateTime(t.created_at)}</span>
               </div>

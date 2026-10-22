@@ -9,23 +9,25 @@ import { isStale, SOURCE_LABEL, TICKET_STATUS, type TicketStatus } from "@/lib/l
 import { formatDate } from "@/lib/dates";
 import { moveTicket } from "@/app/(app)/tickets/actions";
 import type { TicketRow } from "@/components/ticket-list";
+import { Icon } from "@/components/icons";
 
 const COLUMNS: TicketStatus[] = ["new", "in_progress", "closed"];
 
-const COLUMN_STYLE: Record<TicketStatus, string> = {
-  new: "border-t-sky-500",
-  in_progress: "border-t-amber-500",
-  closed: "border-t-emerald-500",
+/** נקודת צבע ליד כותרת העמודה – אותו קוד צבעים כמו תוויות הסטטוס */
+const COLUMN_DOT: Record<TicketStatus, string> = {
+  new: "bg-sky-500",
+  in_progress: "bg-amber-500",
+  closed: "bg-emerald-500",
 };
 
 /** כפתורי העברה (לנייד ולמקלדת) – לאן אפשר להזיז מכל עמודה */
-const MOVES: Record<TicketStatus, { to: TicketStatus; label: string }[]> = {
-  new: [{ to: "in_progress", label: "לבטיפול ←" }],
+const MOVES: Record<TicketStatus, { to: TicketStatus; label: string; forward: boolean }[]> = {
+  new: [{ to: "in_progress", label: "לבטיפול", forward: true }],
   in_progress: [
-    { to: "new", label: "→ לחדשה" },
-    { to: "closed", label: "לסגירה ←" },
+    { to: "new", label: "לחדשה", forward: false },
+    { to: "closed", label: "לסגירה", forward: true },
   ],
-  closed: [{ to: "in_progress", label: "→ פתיחה מחדש" }],
+  closed: [{ to: "in_progress", label: "פתיחה מחדש", forward: false }],
 };
 
 /** לוח קאנבאן לפניות: גרירה בין עמודות (מחשב) או כפתורי העברה (נייד). */
@@ -75,13 +77,16 @@ export function TicketBoard({ rows }: { rows: TicketRow[] }) {
               if (id) move(id, col);
               setDragId(null);
             }}
-            className={`flex w-[85%] shrink-0 snap-center flex-col rounded-2xl border border-t-4 border-line bg-sand/40 p-3 transition md:h-[calc(100dvh-9.5rem)] md:w-auto ${COLUMN_STYLE[col]} ${
+            className={`flex w-[85%] shrink-0 snap-center flex-col rounded-2xl border border-line bg-sand/40 p-3 transition md:h-[calc(100dvh-9.5rem)] md:w-auto ${
               over === col ? "bg-rose/10 ring-2 ring-rose/40" : ""
             }`}
           >
             <header className="mb-3 flex items-center justify-between px-1">
-              <h2 className="font-semibold">{st.label}</h2>
-              <span className="rounded-full bg-surface px-2 py-0.5 text-xs font-semibold text-muted">{list.length}</span>
+              <h2 className="flex items-center gap-2 font-semibold">
+                <span className={`h-2.5 w-2.5 rounded-full ${COLUMN_DOT[col]}`} aria-hidden />
+                {st.label}
+              </h2>
+              <span className="rounded-full bg-surface px-2 py-0.5 text-xs font-semibold text-muted tabular-nums">{list.length}</span>
             </header>
 
             <ul className="-mx-1 flex min-h-24 flex-1 flex-col gap-2 px-1 md:overflow-y-auto">
@@ -100,7 +105,7 @@ export function TicketBoard({ rows }: { rows: TicketRow[] }) {
                       setDragId(t.id);
                     }}
                     onDragEnd={() => setDragId(null)}
-                    className={`cursor-grab rounded-xl border bg-surface p-3 shadow-sm transition active:cursor-grabbing ${
+                    className={`cursor-grab rounded-xl border bg-surface p-3 transition active:cursor-grabbing ${
                       stale ? "border-red-300" : "border-line"
                     } ${dragId === t.id ? "opacity-50" : ""}`}
                   >
@@ -108,7 +113,7 @@ export function TicketBoard({ rows }: { rows: TicketRow[] }) {
                       <Link href={`/tickets/${t.id}`} className="text-sm font-semibold text-rose-dark hover:underline">
                         #{t.ticket_number}
                       </Link>
-                      {t.source === "agent" && <Badge tone="rose">🤖 {SOURCE_LABEL.agent}</Badge>}
+                      {t.source === "agent" && <Badge tone="rose"><Icon name="bot" className="h-3.5 w-3.5" />{SOURCE_LABEL.agent}</Badge>}
                       {stale && <Badge tone="red">מעל 24 ש׳</Badge>}
                       <span className="ms-auto text-xs text-muted">{formatDate(t.created_at)}</span>
                     </div>
@@ -127,9 +132,11 @@ export function TicketBoard({ rows }: { rows: TicketRow[] }) {
                           key={m.to}
                           type="button"
                           onClick={() => move(t.id, m.to)}
-                          className="min-h-9 flex-1 rounded-lg border border-line text-xs hover:bg-sand"
+                          className="inline-flex min-h-9 flex-1 items-center justify-center gap-1 rounded-lg border border-line text-xs hover:bg-sand"
                         >
+                          {!m.forward && <Icon name="arrowRight" className="h-3.5 w-3.5" />}
                           {m.label}
+                          {m.forward && <Icon name="arrowLeft" className="h-3.5 w-3.5" />}
                         </button>
                       ))}
                     </div>

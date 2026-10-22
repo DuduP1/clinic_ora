@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import { QuickSearch } from "@/components/quick-search";
+import { Icon } from "@/components/icons";
 import { KeyboardShortcuts } from "@/components/keyboard-shortcuts";
 import { requireStaff } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
@@ -43,9 +44,9 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
               href="/help"
               aria-label="עזרה וקיצורי מקלדת"
               title="עזרה וקיצורי מקלדת (?)"
-              className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-surface text-lg font-semibold text-ink transition hover:bg-sand sm:inline-flex"
+              className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-surface text-ink transition hover:bg-sand sm:inline-flex"
             >
-              ?
+              <Icon name="help" className="h-5 w-5" />
             </Link>
             <ThemeToggle />
             <details className="relative">
