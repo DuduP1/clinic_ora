@@ -26,7 +26,7 @@ export default async function StaffPage() {
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="font-semibold">{s.full_name}</span>
-                    <Badge tone={s.role === "admin" ? "rose" : "gray"}>{ROLE_LABEL[s.role]}</Badge>
+                    <Badge tone={s.role === "admin" ? "accent" : "gray"}>{ROLE_LABEL[s.role]}</Badge>
                     {!s.is_active && <Badge tone="red">מושבתת</Badge>}
                     {s.id === me.id && <span className="text-xs text-muted">(את)</span>}
                   </div>

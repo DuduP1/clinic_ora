@@ -21,7 +21,7 @@ export function FilterSelect({
         value={current.href}
         onChange={(e) => router.push(e.target.value)}
         aria-label={label}
-        className={`h-9 cursor-pointer appearance-none rounded-full border py-0 ps-3.5 pe-8 text-sm outline-none transition focus:ring-2 focus:ring-rose/25 ${
+        className={`h-9 cursor-pointer appearance-none rounded-full border py-0 ps-3.5 pe-8 text-sm outline-none transition focus:ring-2 focus:ring-accent/25 ${
           isFiltered ? "border-ink bg-ink text-on-ink" : "border-line bg-surface text-ink hover:bg-sand"
         }`}
       >

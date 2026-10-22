@@ -3,55 +3,90 @@
 /* מצב כהה נשלט ע"י <html data-theme="dark"> (כפתור בממשק, נשמר בעוגייה) */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-/* טוקנים סמנטיים – הערכים מתחלפים לפי ערכת הנושא */
+/* טוקנים סמנטיים – עולם "בוטיק זהב": אספרסו ושמפניה מתוך הלוגו. הערכים מתחלפים לפי ערכת הנושא */
 @theme inline {
   --font-sans: var(--font-heebo), Arial, sans-serif;
+  --font-display: var(--font-bellefair), var(--font-heebo), serif; /* כותרות ותאריך היום בלבד */
 
-  --color-cream: var(--c-cream); /* רקע עמוד */
+  --color-cream: var(--c-cream); /* רקע עבודה (פורצלן) */
   --color-surface: var(--c-surface); /* כרטיסים, טפסים */
   --color-sand: var(--c-sand); /* רקע משני / hover */
-  --color-ink: var(--c-ink); /* טקסט ראשי */
-  --color-on-ink: var(--c-on-ink); /* טקסט על רקע ink */
+  --color-ink: var(--c-ink); /* טקסט ראשי (אספרסו) */
+  --color-on-ink: var(--c-on-ink);
   --color-muted: var(--c-muted);
   --color-line: var(--c-line);
-  --color-rose: var(--c-rose);
-  --color-rose-dark: var(--c-rose-dark);
-  /* פעולה ראשית – גוון כהה מספיק לטקסט לבן (ניגודיות ≥4.5:1) */
-  --color-primary: var(--c-primary);
+  --color-accent: var(--c-accent); /* זהב – סימונים, פוקוס, קווי היומן */
+  --color-accent-strong: var(--c-accent-strong); /* זהב כהה לטקסט וקישורים */
+  --color-primary: var(--c-primary); /* פעולה ראשית */
   --color-primary-hover: var(--c-primary-hover);
   --color-on-primary: var(--c-on-primary);
+  --color-shell: var(--c-shell); /* תפריט הצד */
+  --color-on-shell: var(--c-on-shell);
+  --color-on-shell-muted: var(--c-on-shell-muted);
 }
 
 :root {
   color-scheme: light;
-  --c-cream: #faf7f4;
+  --c-cream: #f7f6f3;
   --c-surface: #ffffff;
-  --c-sand: #efe6dd;
-  --c-ink: #2e2a28;
-  --c-on-ink: #ffffff;
-  --c-muted: #736a65;
-  --c-line: #e4dbd2;
-  --c-rose: #b5838d;
-  --c-rose-dark: #96636d;
-  --c-primary: #96636d;
-  --c-primary-hover: #8a5862;
-  --c-on-primary: #ffffff;
+  --c-sand: #efece6;
+  --c-ink: #2a221d;
+  --c-on-ink: #fbf9f6;
+  --c-muted: #6f655d;
+  --c-line: #e4ded5;
+  --c-accent: #b08d57;
+  --c-accent-strong: #86662f;
+  --c-primary: #2f251f;
+  --c-primary-hover: #45372e;
+  --c-on-primary: #fbf9f6;
+  --c-shell: #241c17;
+  --c-on-shell: #efe7dc;
+  --c-on-shell-muted: #b9ab9a;
+
+  /* סטטוסים בגווני אבני חן מעודנים (במקום ברירות המחדל של Tailwind) */
+  --color-sky-50: #eef3f8;
+  --color-sky-100: #e3ebf4;
+  --color-sky-200: #c7d6e7;
+  --color-sky-500: #3d6a99;
+  --color-sky-700: #2f5a85;
+  --color-sky-800: #264b70;
+  --color-sky-900: #1c3a57;
+  --color-amber-100: #f5ecd9;
+  --color-amber-200: #e9d6ae;
+  --color-amber-500: #b8862b;
+  --color-amber-700: #8a6110;
+  --color-amber-800: #74510d;
+  --color-emerald-50: #eef4ef;
+  --color-emerald-100: #e2ede4;
+  --color-emerald-200: #c3dac8;
+  --color-emerald-500: #5b8a66;
+  --color-emerald-600: #4f7a5a;
+  --color-emerald-800: #35573d;
+  --color-emerald-900: #27412d;
+  --color-red-50: #f8ecea;
+  --color-red-100: #f2dcd8;
+  --color-red-200: #e5bdb6;
+  --color-red-700: #9a3328;
+  --color-red-800: #7f2a21;
 }
 
 [data-theme="dark"] {
   color-scheme: dark; /* תאריכונים, תיבות בחירה וגלילה בגוון כהה */
-  --c-cream: #171413;
-  --c-surface: #221e1c;
-  --c-sand: #2e2826;
-  --c-ink: #ede7e2;
-  --c-on-ink: #171413;
-  --c-muted: #a69c96;
-  --c-line: #3b3431;
-  --c-rose: #c48f99;
-  --c-rose-dark: #e2b0ba;
-  --c-primary: #c48f99;
-  --c-primary-hover: #d3a1ab;
-  --c-on-primary: #171413;
+  --c-cream: #141110;
+  --c-surface: #1d1815;
+  --c-sand: #29221e;
+  --c-ink: #efe8df;
+  --c-on-ink: #141110;
+  --c-muted: #a99d92;
+  --c-line: #362d28;
+  --c-accent: #cfa96a;
+  --c-accent-strong: #e0c08a;
+  --c-primary: #cfa96a;
+  --c-primary-hover: #dcb87c;
+  --c-on-primary: #1a1411;
+  --c-shell: #0f0c0b;
+  --c-on-shell: #efe7dc;
+  --c-on-shell-muted: #a99d92;
 
   /* גווני הסטטוסים: רקעים בהירים הופכים לגוונים כהים, טקסט כהה הופך לבהיר */
   --color-red-50: #3a1b1b;
@@ -95,16 +130,16 @@ body {
 
 /* משטחי דפדפן בצבעי המערכת: סימון טקסט, סמן, פקדים, פוקוס וגלילה */
 ::selection {
-  background: color-mix(in oklab, var(--color-rose) 30%, transparent);
+  background: color-mix(in oklab, var(--color-accent) 30%, transparent);
   color: var(--color-ink);
 }
 html {
-  caret-color: var(--color-rose-dark);
-  accent-color: var(--color-rose);
+  caret-color: var(--color-accent-strong);
+  accent-color: var(--color-accent);
   scrollbar-color: var(--color-line) transparent;
 }
 :focus-visible {
-  outline: 2px solid var(--color-rose);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 /* שדות קלט מסמנים פוקוס בעצמם (מסגרת + טבעת) */

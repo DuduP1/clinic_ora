@@ -78,7 +78,7 @@ export function TicketBoard({ rows }: { rows: TicketRow[] }) {
               setDragId(null);
             }}
             className={`flex w-[85%] shrink-0 snap-center flex-col rounded-2xl border border-line bg-sand/40 p-3 transition md:h-[calc(100dvh-9.5rem)] md:w-auto ${
-              over === col ? "bg-rose/10 ring-2 ring-rose/40" : ""
+              over === col ? "bg-accent/10 ring-2 ring-accent/40" : ""
             }`}
           >
             <header className="mb-3 flex items-center justify-between px-1">
@@ -110,10 +110,10 @@ export function TicketBoard({ rows }: { rows: TicketRow[] }) {
                     } ${dragId === t.id ? "opacity-50" : ""}`}
                   >
                     <div className="flex flex-wrap items-center gap-1.5">
-                      <Link href={`/tickets/${t.id}`} className="text-sm font-semibold text-rose-dark hover:underline">
+                      <Link href={`/tickets/${t.id}`} className="text-sm font-semibold text-accent-strong hover:underline">
                         #{t.ticket_number}
                       </Link>
-                      {t.source === "agent" && <Badge tone="rose"><Icon name="bot" className="h-3.5 w-3.5" />{SOURCE_LABEL.agent}</Badge>}
+                      {t.source === "agent" && <Badge tone="accent"><Icon name="bot" className="h-3.5 w-3.5" />{SOURCE_LABEL.agent}</Badge>}
                       {stale && <Badge tone="red">מעל 24 ש׳</Badge>}
                       <span className="ms-auto text-xs text-muted">{formatDate(t.created_at)}</span>
                     </div>

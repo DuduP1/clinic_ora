@@ -1,21 +1,29 @@
 import Link from "next/link";
 import { requireStaff } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
-import { dayRange, formatDate } from "@/lib/dates";
+import { addDaysYmd, formatDate, TZ, ymdInTz, zonedToDate } from "@/lib/dates";
 import { isStale, type TicketStatus } from "@/lib/labels";
-import { AppointmentList, APPOINTMENT_SELECT, type AppointmentRow } from "@/components/appointment-list";
+import { APPOINTMENT_SELECT, type AppointmentRow } from "@/components/appointment-list";
+import { DayRail } from "@/components/day-rail";
 import { ButtonLink, Card } from "@/components/ui";
 import { Icon } from "@/components/icons";
 
 export const metadata = { title: "מסך ראשי · קליניקת אורה" };
 
+const weekdayLong = new Intl.DateTimeFormat("he-IL", { timeZone: TZ, weekday: "long" });
+
 type OpenTicket = { status: TicketStatus; assigned_to: string | null; created_at: string };
 
 export default async function DashboardPage({ searchParams }: PageProps<"/">) {
   const me = await requireStaff();
-  const { error } = await searchParams;
+  const { error, day: dayParam } = await searchParams;
   const supabase = await createClient();
-  const today = dayRange(0, 1);
+  // היום המוצג ביומן: ברירת מחדל היום, ואפשר לדפדף ליום אחר (?day=YYYY-MM-DD)
+  const todayYmd = ymdInTz();
+  const day = typeof dayParam === "string" && /^\d{4}-\d{2}-\d{2}$/.test(dayParam) ? dayParam : todayYmd;
+  const isToday = day === todayYmd;
+  const today = { from: zonedToDate(day, "00:00").toISOString(), to: zonedToDate(addDaysYmd(day, 1), "00:00").toISOString() };
+  const dayHref = (d: string) => (d === todayYmd ? "/" : `/?day=${d}`);
 
   const [{ data: open }, { data: staff }, { data: todayAppts }] = await Promise.all([
     supabase.from("service_tickets").select("status, assigned_to, created_at").in("status", ["new", "in_progress"]).returns<OpenTicket[]>(),
@@ -39,10 +47,10 @@ export default async function DashboardPage({ searchParams }: PageProps<"/">) {
   }));
 
   const stats = [
-    { label: "פניות חדשות", value: count((t) => t.status === "new"), href: "/tickets?status=new", tone: "text-sky-700" },
-    { label: "פניות בטיפול", value: count((t) => t.status === "in_progress"), href: "/tickets?status=in_progress", tone: "text-amber-700" },
-    { label: "ללא אחראית", value: count((t) => !t.assigned_to), href: "/tickets?assignee=none", tone: stale ? "text-red-700" : "text-ink" },
-    { label: "תורים היום", value: scheduledToday, href: "/appointments?range=today", tone: "text-rose-dark" },
+    { label: isToday ? "תורים היום" : "תורים ביום זה", value: scheduledToday, href: "/appointments?range=today", dot: "bg-accent", alert: false },
+    { label: "פניות חדשות", value: count((t) => t.status === "new"), href: "/tickets?status=new", dot: "bg-sky-500", alert: false },
+    { label: "בטיפול", value: count((t) => t.status === "in_progress"), href: "/tickets?status=in_progress", dot: "bg-amber-500", alert: false },
+    { label: "ללא אחראית", value: count((t) => !t.assigned_to), href: "/tickets?assignee=none", dot: "bg-red-700", alert: count((t) => !t.assigned_to) > 0 },
   ];
 
   return (
@@ -51,8 +59,10 @@ export default async function DashboardPage({ searchParams }: PageProps<"/">) {
 
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold">שלום, {me.full_name.split(" ")[0]}</h1>
-          <p className="text-sm text-muted">{formatDate(new Date())}</p>
+          <h1 className="font-display text-4xl leading-tight">שלום, {me.full_name.split(" ")[0]}</h1>
+          <p className="mt-1 text-sm text-muted">
+            {weekdayLong.format(new Date())} · <span className="tabular-nums">{formatDate(new Date())}</span>
+          </p>
         </div>
         <div className="flex flex-wrap gap-2">
           <ButtonLink href="/customers/new" variant="secondary">+ לקוחה</ButtonLink>
@@ -61,25 +71,61 @@ export default async function DashboardPage({ searchParams }: PageProps<"/">) {
         </div>
       </div>
 
+      {/* פס מצב אחד שקט במקום ארבע קופסאות מספרים */}
+      <nav aria-label="מצב היום" className="grid grid-cols-2 overflow-hidden rounded-xl border border-line bg-surface sm:grid-cols-4 sm:divide-x sm:divide-line sm:divide-x-reverse">
+        {stats.map((s, i) => (
+          <Link
+            key={s.label}
+            href={s.href}
+            className={`flex items-center gap-3 px-4 py-3 transition hover:bg-sand/50 ${i < 2 ? "border-b border-line sm:border-b-0" : ""} ${i % 2 === 0 ? "border-e border-line sm:border-e-0" : ""} ${s.alert ? "bg-red-50 hover:bg-red-100" : ""}`}
+          >
+            <span className={`h-2 w-2 shrink-0 rounded-full ${s.dot}`} aria-hidden />
+            <span className={`text-2xl font-semibold tabular-nums ${s.alert ? "text-red-700" : "text-ink"}`}>{s.value}</span>
+            <span className={`text-sm ${s.alert ? "text-red-800" : "text-muted"}`}>{s.label}</span>
+          </Link>
+        ))}
+      </nav>
+
       {stale > 0 && (
-        <Link href="/tickets?assignee=none" className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800 transition hover:bg-red-100">
-          <Icon name="alert" className="h-5 w-5" />
+        <Link href="/tickets?assignee=none" className="-mt-2 flex items-center gap-2 text-sm text-red-700 hover:underline">
+          <Icon name="alert" />
           {stale} {stale === 1 ? "פנייה חדשה ממתינה" : "פניות חדשות ממתינות"} יותר מ-24 שעות בלי אחראית – לחצי לשיוך
         </Link>
       )}
 
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        {stats.map((s) => (
-          <Link key={s.label} href={s.href} className="rounded-2xl border border-line bg-surface p-4 transition hover:border-rose/50 hover:bg-sand/40">
-            <div className={`text-3xl font-bold tabular-nums ${s.tone}`}>{s.value}</div>
-            <div className="mt-1 text-sm text-muted">{s.label}</div>
-          </Link>
-        ))}
-      </div>
-
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]">
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:items-start">
         <Card>
-          <h2 className="mb-3 text-lg font-semibold">פניות פתוחות לפי אחראית</h2>
+          <div className="mb-4 flex items-baseline justify-between gap-2">
+            <h2 className="font-display text-2xl">
+              {isToday ? "היום ביומן" : `${weekdayLong.format(zonedToDate(day, "12:00"))} · ${formatDate(zonedToDate(day, "12:00"))}`}
+            </h2>
+            <div className="flex items-center gap-1 text-sm">
+              <Link href={dayHref(addDaysYmd(day, -1))} aria-label="יום קודם" className="inline-flex h-9 w-9 items-center justify-center rounded-lg hover:bg-sand">
+                <Icon name="arrowRight" />
+              </Link>
+              {!isToday && (
+                <Link href="/" className="inline-flex h-9 items-center rounded-lg border border-line px-3 hover:bg-sand">
+                  היום
+                </Link>
+              )}
+              <Link href={dayHref(addDaysYmd(day, 1))} aria-label="יום הבא" className="inline-flex h-9 w-9 items-center justify-center rounded-lg hover:bg-sand">
+                <Icon name="arrowLeft" />
+              </Link>
+            </div>
+          </div>
+          {(todayAppts ?? []).length === 0 && (
+            <p className="mb-3 text-sm text-muted">
+              {isToday ? "אין תורים היום." : "אין תורים ביום זה."}{" "}
+              <Link href="/appointments/new" className="font-medium text-accent-strong hover:underline">
+                קביעת תור חדש
+              </Link>
+            </p>
+          )}
+          <DayRail rows={todayAppts ?? []} showNow={isToday} />
+        </Card>
+
+        <Card>
+          <h2 className="mb-3 font-display text-2xl">פניות פתוחות לפי אחראית</h2>
           <table className="w-full text-sm">
             <thead className="text-right text-muted">
               <tr className="border-b border-line">
@@ -93,25 +139,17 @@ export default async function DashboardPage({ searchParams }: PageProps<"/">) {
               {byAssignee.map((r) => (
                 <tr key={r.key} className="border-b border-line last:border-0">
                   <td className="py-2.5">
-                    <Link href={`/tickets?assignee=${r.key}`} className={`hover:underline ${r.key === "none" ? "text-muted" : "font-medium text-rose-dark"}`}>
+                    <Link href={`/tickets?assignee=${r.key}`} className={`hover:underline ${r.key === "none" ? "text-muted" : "font-medium text-accent-strong"}`}>
                       {r.name}
                     </Link>
                   </td>
-                  <td className="py-2.5 text-center">{r.newCount}</td>
-                  <td className="py-2.5 text-center">{r.inProgress}</td>
-                  <td className="py-2.5 text-center font-semibold">{r.newCount + r.inProgress}</td>
+                  <td className="py-2.5 text-center tabular-nums">{r.newCount}</td>
+                  <td className="py-2.5 text-center tabular-nums">{r.inProgress}</td>
+                  <td className="py-2.5 text-center font-semibold tabular-nums">{r.newCount + r.inProgress}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </Card>
-
-        <Card>
-          <div className="mb-1 flex items-center justify-between">
-            <h2 className="text-lg font-semibold">תורים היום</h2>
-            <Link href="/appointments?range=today" className="text-sm text-rose-dark hover:underline">לכל התורים</Link>
-          </div>
-          <AppointmentList rows={todayAppts ?? []} timeOnly empty="אין תורים היום" emptyAction={{ href: "/appointments/new", label: "קביעת תור חדש" }} />
         </Card>
       </div>
     </div>

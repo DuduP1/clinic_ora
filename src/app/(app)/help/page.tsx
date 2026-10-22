@@ -61,7 +61,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
     <section
       id={id}
       aria-labelledby={`${id}-title`}
-      className="scroll-mt-[4.75rem] rounded-2xl border border-line bg-surface p-4 shadow-sm transition-shadow duration-700 target:ring-2 target:ring-rose/50 sm:p-5"
+      className="scroll-mt-[4.75rem] rounded-2xl border border-line bg-surface p-4 shadow-sm transition-shadow duration-700 target:ring-2 target:ring-accent/50 sm:p-5"
     >
       <h2 id={`${id}-title`} className="mb-3 text-lg font-bold">
         {title}
@@ -79,7 +79,7 @@ export default async function HelpPage() {
     <div className="grid gap-4 lg:grid-cols-[13rem_minmax(0,1fr)] lg:items-start">
       {/* תוכן עניינים */}
       <nav aria-label="תוכן העזרה" className="lg:sticky lg:top-20">
-        <h1 className="mb-2 text-xl font-bold">עזרה ומדריך</h1>
+        <h1 className="mb-2 font-display text-3xl">עזרה ומדריך</h1>
         <ul className="flex flex-wrap gap-1.5 lg:flex-col lg:gap-0.5">
           {SECTIONS.map((s) => (
             <li key={s.id}>
@@ -163,7 +163,7 @@ export default async function HelpPage() {
               פנייה <Badge tone="red">ללא שיוך מעל 24 שעות</Badge> מסומנת באדום, וגם מופיעה כהתראה במסך הראשי.
             </li>
             <li>
-              פניות שפתח סוכן ה-AI מסומנות ב-<Badge tone="rose"><Icon name="bot" className="h-3.5 w-3.5" />סוכן AI</Badge>. הן מגיעות כ&quot;חדשה&quot; ללא אחראית.
+              פניות שפתח סוכן ה-AI מסומנות ב-<Badge tone="accent"><Icon name="bot" className="h-3.5 w-3.5" />סוכן AI</Badge>. הן מגיעות כ&quot;חדשה&quot; ללא אחראית.
             </li>
             <li>אפשר לפתוח מחדש פנייה שנסגרה. היא חוזרת לבטיפול.</li>
           </ul>
@@ -246,7 +246,7 @@ export default async function HelpPage() {
             <li>לא ניתן ליצור שתי לקוחות עם אותו טלפון. המערכת תציע קישור לכרטיס הקיים.</li>
             <li>במסך הראשי, לחיצה על מונה פותחת את הרשימה המסוננת המתאימה.</li>
             <li>
-              שאלות נוספות? פני ל{me.role === "admin" ? "תמיכה הטכנית" : "רותם"}. <Link href="/" className="text-rose-dark hover:underline">חזרה למסך הראשי</Link>
+              שאלות נוספות? פני ל{me.role === "admin" ? "תמיכה הטכנית" : "רותם"}. <Link href="/" className="text-accent-strong hover:underline">חזרה למסך הראשי</Link>
             </li>
           </ul>
         </Section>
@@ -270,7 +270,7 @@ export default async function HelpPage() {
             <dd dir="ltr" className="text-right">Claude Code</dd>
             <dt className="text-muted">קוד מקור</dt>
             <dd>
-              <a href="https://github.com/DuduP1/clinic_ora" target="_blank" rel="noreferrer" className="text-rose-dark hover:underline" dir="ltr">
+              <a href="https://github.com/DuduP1/clinic_ora" target="_blank" rel="noreferrer" className="text-accent-strong hover:underline" dir="ltr">
                 github.com/DuduP1/clinic_ora
               </a>
             </dd>

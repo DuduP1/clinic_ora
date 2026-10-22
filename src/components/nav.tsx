@@ -38,11 +38,14 @@ export function SideNav({ isAdmin, newTickets }: { isAdmin: boolean; newTickets:
         <Link
           key={i.href}
           href={i.href}
-          className={`flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm transition ${
-            isActive(i.href) ? "bg-rose/15 font-semibold text-rose-dark" : "text-ink hover:bg-sand"
+          aria-current={isActive(i.href) ? "page" : undefined}
+          className={`group flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm transition ${
+            isActive(i.href) ? "bg-accent/15 font-medium text-on-shell" : "text-on-shell-muted hover:bg-on-shell/5 hover:text-on-shell"
           }`}
         >
-          <Icon d={i.icon} />
+          <span className={isActive(i.href) ? "text-accent" : ""}>
+            <Icon d={i.icon} />
+          </span>
           <span className="flex-1">{i.sideLabel ?? i.label}</span>
           {i.href === "/tickets" && newTickets > 0 && (
             <span className="rounded-full bg-sky-100 px-2 py-0.5 text-xs font-semibold text-sky-800 tabular-nums ring-1 ring-sky-200 ring-inset">{newTickets}</span>
@@ -64,7 +67,7 @@ export function BottomNav({ newTickets }: { newTickets: number }) {
             <Link
               href={i.href}
               className={`relative flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs ${
-                isActive(i.href) ? "font-semibold text-rose-dark" : "text-muted"
+                isActive(i.href) ? "font-semibold text-accent-strong" : "text-muted"
               }`}
             >
               <Icon d={i.icon} />

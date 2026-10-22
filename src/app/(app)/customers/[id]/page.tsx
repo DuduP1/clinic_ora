@@ -28,8 +28,8 @@ export default async function CustomerCardPage({ params }: PageProps<"/customers
       <Card>
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold">{customer.full_name}</h1>
-            <a href={`tel:${customer.phone}`} className="mt-1 inline-block text-lg text-rose-dark" dir="ltr">
+            <h1 className="font-display text-4xl leading-tight">{customer.full_name}</h1>
+            <a href={`tel:${customer.phone}`} className="mt-1 inline-block text-lg text-accent-strong" dir="ltr">
               {formatPhone(customer.phone)}
             </a>
             <p className="mt-1 text-xs text-muted">לקוחה מאז {formatDate(customer.created_at)}</p>

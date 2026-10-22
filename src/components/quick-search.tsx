@@ -37,7 +37,7 @@ export function QuickSearch() {
         placeholder="חיפוש טלפון או שם…"
         aria-label="חיפוש לקוחה לפי טלפון או שם"
         aria-keyshortcuts="/ Control+K"
-        className="h-10 w-full rounded-full border border-line bg-surface ps-9 pe-4 text-sm outline-none focus:border-rose focus:ring-2 focus:ring-rose/25 md:pe-9"
+        className="h-10 w-full rounded-full border border-line bg-surface ps-9 pe-4 text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/25 md:pe-9"
       />
       <kbd className="pointer-events-none absolute top-1/2 left-3 hidden -translate-y-1/2 rounded border border-line px-1.5 text-[11px] leading-4 text-muted md:block">
         /

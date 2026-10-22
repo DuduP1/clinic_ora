@@ -57,7 +57,7 @@ export function AppointmentList({
               <div className="mt-0.5 text-sm text-muted">
                 {showCustomer && a.customer && (
                   <>
-                    <Link href={`/customers/${a.customer.id}`} className="font-medium text-rose-dark hover:underline">
+                    <Link href={`/customers/${a.customer.id}`} className="font-medium text-accent-strong hover:underline">
                       {a.customer.full_name}
                     </Link>
                     {" · "}
