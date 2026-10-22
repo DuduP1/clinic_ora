@@ -40,10 +40,10 @@ export function SideNav({ isAdmin, newTickets }: { isAdmin: boolean; newTickets:
           href={i.href}
           aria-current={isActive(i.href) ? "page" : undefined}
           className={`group flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm transition ${
-            isActive(i.href) ? "bg-accent/15 font-medium text-on-shell" : "text-on-shell-muted hover:bg-on-shell/5 hover:text-on-shell"
+            isActive(i.href) ? "bg-accent/12 font-semibold text-on-shell" : "text-on-shell-muted hover:bg-on-shell/5 hover:text-on-shell"
           }`}
         >
-          <span className={isActive(i.href) ? "text-accent" : ""}>
+          <span className={isActive(i.href) ? "text-accent-strong" : ""}>
             <Icon d={i.icon} />
           </span>
           <span className="flex-1">{i.sideLabel ?? i.label}</span>

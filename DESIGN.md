@@ -3,7 +3,7 @@
 The CRM reads as the clinic's reception day-book, not a SaaS dashboard. Espresso and champagne gold come from the lotus logo. Operate surface: standard controls and navigation; the world lends only type, palette, density and one signature move.
 
 ## Color (tokens in `src/app/globals.css`)
-Strategy: Restrained ground + committed shell. The espresso sidebar owns its region; gold is used for markers, focus, the day-rail hairlines and links, never as decoration fill.
+Strategy: Restrained. Light sidebar (white, hairline border) – the dark espresso sidebar was tried and rejected by the owner; gold is used for markers, focus, the day-rail hairlines and links, never as decoration fill.
 
 | Token | Light | Dark | Role |
 |---|---|---|---|
@@ -16,7 +16,7 @@ Strategy: Restrained ground + committed shell. The espresso sidebar owns its reg
 | `accent` | #B08D57 | #CFA96A | gold: markers, focus ring, rail lines |
 | `accent-strong` | #86662F | #E0C08A | gold text / links (≥4.9:1) |
 | `primary` / `on-primary` | #2F251F / #FBF9F6 | #CFA96A / #1A1411 | primary action |
-| `shell` / `on-shell` / `on-shell-muted` | #241C17 / #EFE7DC / #B9AB9A | #0F0C0B / … | desktop sidebar |
+| `shell` / `on-shell` / `on-shell-muted` | #FFFFFF / #2A221D / #6F655D | #1D1815 / #EFE8DF / #A99D92 | desktop sidebar |
 
 Status (jewel set, overriding Tailwind's sky/amber/emerald/red/stone): new = sapphire, in progress = honey, done = sage, cancelled = stone, alert = garnet. Badges use the 100 fill + 800 text pair.
 
@@ -38,7 +38,7 @@ Cards: `rounded-xl` (12px), 1px `line` border, no shadow. Controls: `rounded-lg`
 `components/day-rail.tsx`: vertical hour rail (clinic hours 09:00–19:00, widened if needed), gold hairline per hour, appointments placed by start time and duration in status tones, overlapping ones split into lanes, a gold "now" line on today. Day paging with `/?day=YYYY-MM-DD`.
 
 ## Layout
-Desktop: espresso sidebar (15rem) + porcelain work area (max 6xl). Mobile: bottom nav on surface, same tokens. Login: espresso brand panel with the gold logo beside a plain form.
+Desktop: white sidebar (15rem, hairline border) + porcelain work area (max 6xl). Mobile: bottom nav on surface, same tokens. Login: light brand panel with the logo beside a plain form.
 
 ## Don't
 Gradient text, glass decoration, colored side borders >1px, KPI tile grids, emoji icons, `bg-rose`/fixed hex in components, bold Bellefair.

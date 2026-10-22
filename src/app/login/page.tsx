@@ -9,9 +9,11 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
   return (
     <main className="grid min-h-screen md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
       {/* צד המותג: אספרסו עם הלוגו בזהב */}
-      <section className="flex flex-col items-center justify-center gap-3 bg-shell px-6 py-10 text-on-shell md:py-0">
+      <section className="flex flex-col items-center justify-center gap-3 border-b border-line bg-shell px-6 py-10 text-on-shell md:border-b-0 md:border-l md:py-0">
         <h1>
-          <Image src="/logo-full-dark.png" alt="קליניקת אורה" width={398} height={263} priority className="h-auto w-48 md:w-72" />
+          {/* בתצוגה כהה – גרסה מוארת של הלוגו */}
+          <Image src="/logo-full.png" alt="קליניקת אורה" width={398} height={263} priority className="h-auto w-48 md:w-72 dark:hidden" />
+          <Image src="/logo-full-dark.png" alt="קליניקת אורה" width={398} height={263} priority className="hidden h-auto w-48 md:w-72 dark:block" />
         </h1>
         <p className="text-sm text-on-shell-muted">מערכת ניהול לקוחות · לצוות הקליניקה</p>
       </section>

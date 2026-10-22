@@ -39,9 +39,9 @@
   --c-primary: #2f251f;
   --c-primary-hover: #45372e;
   --c-on-primary: #fbf9f6;
-  --c-shell: #241c17;
-  --c-on-shell: #efe7dc;
-  --c-on-shell-muted: #b9ab9a;
+  --c-shell: #ffffff;
+  --c-on-shell: #2a221d;
+  --c-on-shell-muted: #6f655d;
 
   /* סטטוסים בגווני אבני חן מעודנים (במקום ברירות המחדל של Tailwind) */
   --color-sky-50: #eef3f8;
@@ -84,8 +84,8 @@
   --c-primary: #cfa96a;
   --c-primary-hover: #dcb87c;
   --c-on-primary: #1a1411;
-  --c-shell: #0f0c0b;
-  --c-on-shell: #efe7dc;
+  --c-shell: #1d1815;
+  --c-on-shell: #efe8df;
   --c-on-shell-muted: #a99d92;
 
   /* גווני הסטטוסים: רקעים בהירים הופכים לגוונים כהים, טקסט כהה הופך לבהיר */

@@ -24,7 +24,7 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
   return (
     <div className="min-h-screen md:grid md:grid-cols-[15rem_1fr]">
       {/* תפריט צד – מחשב */}
-      <aside className="hidden bg-shell text-on-shell md:sticky md:top-0 md:flex md:h-screen md:flex-col md:gap-8 md:overflow-y-auto md:px-4 md:py-5">
+      <aside className="hidden border-l border-line bg-shell text-on-shell md:sticky md:top-0 md:flex md:h-screen md:flex-col md:gap-8 md:overflow-y-auto md:px-4 md:py-5">
         <Link href="/" className="flex items-center gap-2.5 px-2">
           <Image src="/logo-mark.png" alt="" width={48} height={28} priority className="h-auto w-12" />
           <span className="font-display text-2xl leading-none">קליניקת אורה</span>
