@@ -1,0 +1,13 @@
+{
+  "name": "Boutique Gold",
+  "mode": "operate",
+  "source": "src/app/globals.css",
+  "fonts": { "display": "Bellefair 400", "sans": "Heebo" },
+  "colors": {
+    "light": { "cream": "#F7F6F3", "surface": "#FFFFFF", "sand": "#EFECE6", "ink": "#2A221D", "muted": "#6F655D", "line": "#E4DED5", "accent": "#B08D57", "accent-strong": "#86662F", "primary": "#2F251F", "on-primary": "#FBF9F6", "shell": "#241C17", "on-shell": "#EFE7DC", "on-shell-muted": "#B9AB9A" },
+    "dark": { "cream": "#141110", "surface": "#1D1815", "sand": "#29221E", "ink": "#EFE8DF", "muted": "#A99D92", "line": "#362D28", "accent": "#CFA96A", "accent-strong": "#E0C08A", "primary": "#CFA96A", "on-primary": "#1A1411", "shell": "#0F0C0B" },
+    "status": { "new": "#2F5A85", "inProgress": "#8A6110", "done": "#35573D", "alert": "#9A3328" }
+  },
+  "radius": { "card": "12px", "control": "8px", "pill": "9999px" },
+  "signature": "components/day-rail.tsx"
+}
