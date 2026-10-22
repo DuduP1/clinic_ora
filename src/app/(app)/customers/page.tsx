@@ -110,7 +110,7 @@ export default async function CustomersPage({ searchParams }: PageProps<"/custom
           <ul className="space-y-2 md:hidden">
             {rows.map((c) => (
               <li key={c.id}>
-                <Link href={`/customers/${c.id}`} className="block rounded-xl border border-line bg-surface p-4 shadow-sm active:bg-sand">
+                <Link href={`/customers/${c.id}`} className="block rounded-xl border border-line bg-surface p-4 active:bg-sand">
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-semibold">{c.full_name}</span>
                     {c.open_tickets > 0 && <Badge tone="orange">{c.open_tickets} פתוחות</Badge>}

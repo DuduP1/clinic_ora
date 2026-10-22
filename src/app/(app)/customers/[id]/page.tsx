@@ -72,7 +72,7 @@ export default async function CustomerCardPage({ params }: PageProps<"/customers
       <div className="grid gap-4 lg:grid-cols-2">
         <Card>
           <h2 className="mb-1 text-lg font-semibold">היסטוריית תורים ({appts?.length ?? 0})</h2>
-          <AppointmentList rows={appts ?? []} showCustomer={false} empty="אין תורים ללקוחה" />
+          <AppointmentList rows={appts ?? []} showCustomer={false} empty="אין תורים ללקוחה" emptyAction={{ href: `/appointments/new?customer=${id}`, label: "קביעת תור ראשון" }} />
         </Card>
         <Card>
           <h2 className="mb-1 text-lg font-semibold">פניות שירות ({tickets?.length ?? 0})</h2>

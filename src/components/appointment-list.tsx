@@ -4,6 +4,7 @@ import { Badge, EmptyState } from "@/components/ui";
 import { APPOINTMENT_STATUS, type AppointmentStatus } from "@/lib/labels";
 import { formatDateTime, formatTime } from "@/lib/dates";
 import { setAppointmentStatus } from "@/app/(app)/appointments/actions";
+import { Icon } from "@/components/icons";
 
 export type AppointmentRow = {
   id: string;
@@ -31,14 +32,16 @@ export function AppointmentList({
   showCustomer = true,
   timeOnly = false,
   empty,
+  emptyAction,
 }: {
   rows: AppointmentRow[];
   showCustomer?: boolean;
   /** בתצוגת "היום" – רק שעה */
   timeOnly?: boolean;
   empty: string;
+  emptyAction?: { href: string; label: string };
 }) {
-  if (rows.length === 0) return <EmptyState>{empty}</EmptyState>;
+  if (rows.length === 0) return <EmptyState action={emptyAction}>{empty}</EmptyState>;
   return (
     <ul className="divide-y divide-line">
       {rows.map((a) => {
@@ -48,7 +51,7 @@ export function AppointmentList({
             <div className="flex flex-col gap-2 @md:flex-row @md:items-center">
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="font-medium">{timeOnly ? formatTime(a.starts_at) : formatDateTime(a.starts_at)}</span>
+                <span className="font-medium tabular-nums">{timeOnly ? formatTime(a.starts_at) : formatDateTime(a.starts_at)}</span>
                 <Badge tone={st.tone}>{st.label}</Badge>
               </div>
               <div className="mt-0.5 text-sm text-muted">
@@ -64,13 +67,14 @@ export function AppointmentList({
                 {a.treatment && ` (${a.treatment.duration_min} דק׳)`}
                 {a.staff && ` · ${a.staff.full_name}`}
               </div>
-              {a.notes && <div className="mt-0.5 text-xs text-muted">📝 {a.notes}</div>}
+              {a.notes && <div className="mt-0.5 flex items-start gap-1 text-xs text-muted"><Icon name="note" className="mt-px h-3.5 w-3.5" />{a.notes}</div>}
             </div>
             <div className="flex gap-1.5">
               {a.status === "scheduled" && (
                 <>
                   <ActionButton action={setAppointmentStatus.bind(null, a.id, "completed")} className="min-h-9 px-3">
-                    ✓ בוצע
+                    <Icon name="check" />
+                    בוצע
                   </ActionButton>
                   <ActionButton
                     action={setAppointmentStatus.bind(null, a.id, "cancelled")}

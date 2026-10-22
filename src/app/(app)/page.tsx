@@ -5,6 +5,7 @@ import { dayRange, formatDate } from "@/lib/dates";
 import { isStale, type TicketStatus } from "@/lib/labels";
 import { AppointmentList, APPOINTMENT_SELECT, type AppointmentRow } from "@/components/appointment-list";
 import { ButtonLink, Card } from "@/components/ui";
+import { Icon } from "@/components/icons";
 
 export const metadata = { title: "מסך ראשי · קליניקת אורה" };
 
@@ -50,7 +51,7 @@ export default async function DashboardPage({ searchParams }: PageProps<"/">) {
 
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold">שלום, {me.full_name.split(" ")[0]} 👋</h1>
+          <h1 className="text-2xl font-bold">שלום, {me.full_name.split(" ")[0]}</h1>
           <p className="text-sm text-muted">{formatDate(new Date())}</p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -61,15 +62,16 @@ export default async function DashboardPage({ searchParams }: PageProps<"/">) {
       </div>
 
       {stale > 0 && (
-        <Link href="/tickets?assignee=none" className="block rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800">
-          ⚠️ {stale} {stale === 1 ? "פנייה חדשה ממתינה" : "פניות חדשות ממתינות"} יותר מ-24 שעות בלי אחראית – לחצי לשיוך
+        <Link href="/tickets?assignee=none" className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800 transition hover:bg-red-100">
+          <Icon name="alert" className="h-5 w-5" />
+          {stale} {stale === 1 ? "פנייה חדשה ממתינה" : "פניות חדשות ממתינות"} יותר מ-24 שעות בלי אחראית – לחצי לשיוך
         </Link>
       )}
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {stats.map((s) => (
-          <Link key={s.label} href={s.href} className="rounded-2xl border border-line bg-surface p-4 shadow-sm transition hover:border-rose/50">
-            <div className={`text-3xl font-bold ${s.tone}`}>{s.value}</div>
+          <Link key={s.label} href={s.href} className="rounded-2xl border border-line bg-surface p-4 transition hover:border-rose/50 hover:bg-sand/40">
+            <div className={`text-3xl font-bold tabular-nums ${s.tone}`}>{s.value}</div>
             <div className="mt-1 text-sm text-muted">{s.label}</div>
           </Link>
         ))}
@@ -109,7 +111,7 @@ export default async function DashboardPage({ searchParams }: PageProps<"/">) {
             <h2 className="text-lg font-semibold">תורים היום</h2>
             <Link href="/appointments?range=today" className="text-sm text-rose-dark hover:underline">לכל התורים</Link>
           </div>
-          <AppointmentList rows={todayAppts ?? []} timeOnly empty="אין תורים היום" />
+          <AppointmentList rows={todayAppts ?? []} timeOnly empty="אין תורים היום" emptyAction={{ href: "/appointments/new", label: "קביעת תור חדש" }} />
         </Card>
       </div>
     </div>

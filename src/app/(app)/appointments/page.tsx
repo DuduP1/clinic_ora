@@ -97,10 +97,11 @@ export default async function AppointmentsPage({ searchParams }: PageProps<"/app
           <>
             <ViewToggle
               options={[
-                { href: `/appointments?${new URLSearchParams({ ...(status && { status }), ...(staffId && { staff: staffId }) })}`, label: "☰ רשימה", active: view === "list" },
+                { href: `/appointments?${new URLSearchParams({ ...(status && { status }), ...(staffId && { staff: staffId }) })}`, label: "רשימה", icon: "list", active: view === "list" },
                 {
                   href: `/appointments?${new URLSearchParams({ view: "calendar", ...(status && { status }), ...(staffId && { staff: staffId }) })}`,
-                  label: "📅 לוח שנה",
+                  label: "לוח שנה",
+                  icon: "calendar",
                   active: view === "calendar",
                 },
               ]}

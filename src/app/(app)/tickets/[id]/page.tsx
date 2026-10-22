@@ -10,6 +10,7 @@ import { Badge, Card } from "@/components/ui";
 import { TicketForm } from "../ticket-form";
 import { deleteTicket, setTicketStatus, takeTicket, updateTicket } from "../actions";
 import { loadTicketOptions } from "../form-data";
+import { Icon } from "@/components/icons";
 
 type Ticket = {
   id: string;
@@ -45,7 +46,7 @@ export default async function TicketPage({ params }: PageProps<"/tickets/[id]">)
           <div className="flex flex-wrap items-center gap-2">
             <h1 className="text-2xl font-bold">פנייה #{t.ticket_number}</h1>
             <Badge tone={st.tone}>{st.label}</Badge>
-            {t.source === "agent" && <Badge tone="rose">🤖 {SOURCE_LABEL.agent}</Badge>}
+            {t.source === "agent" && <Badge tone="rose"><Icon name="bot" className="h-3.5 w-3.5" />{SOURCE_LABEL.agent}</Badge>}
             {isStale(t) && <Badge tone="red">ללא שיוך מעל 24 שעות</Badge>}
           </div>
           {t.customer && (

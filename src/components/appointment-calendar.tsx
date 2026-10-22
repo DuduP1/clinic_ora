@@ -4,6 +4,7 @@ import { AppointmentList, type AppointmentRow } from "@/components/appointment-l
 import { ButtonLink, Card } from "@/components/ui";
 import { addDaysYmd, addMonths, dayLabel, formatTime, monthLabel, weekdayOf, ymdInTz } from "@/lib/dates";
 import { APPOINTMENT_STATUS } from "@/lib/labels";
+import { Icon } from "@/components/icons";
 
 const WEEKDAYS = ["א׳", "ב׳", "ג׳", "ד׳", "ה׳", "ו׳", "ש׳"];
 
@@ -63,7 +64,8 @@ export function AppointmentCalendar({
         {/* ניווט חודשים – ב-RTL "הבא" משמאל */}
         <div className="mb-2 flex items-center justify-between gap-2">
           <Link href={href({ month: addMonths(month, -1), day: "" })} className="inline-flex min-h-10 items-center rounded-lg px-3 text-sm hover:bg-sand" aria-label="חודש קודם">
-            → <span className="hidden sm:inline">&nbsp;חודש קודם</span>
+            <Icon name="arrowRight" />
+            <span className="hidden sm:inline">&nbsp;חודש קודם</span>
           </Link>
           <div className="text-center">
             <h2 className="text-lg leading-tight font-bold">{monthLabel(month)}</h2>
@@ -85,7 +87,8 @@ export function AppointmentCalendar({
               </Link>
             )}
             <Link href={href({ month: addMonths(month, 1), day: "" })} className="inline-flex min-h-10 items-center rounded-lg px-3 text-sm hover:bg-sand" aria-label="חודש הבא">
-              <span className="hidden sm:inline">חודש הבא&nbsp;</span> ←
+              <span className="hidden sm:inline">חודש הבא&nbsp;</span>
+              <Icon name="arrowLeft" />
             </Link>
           </div>
         </div>
@@ -115,7 +118,7 @@ export function AppointmentCalendar({
               >
                 <span
                   className={`flex h-6 w-6 items-center justify-center self-start rounded-full text-xs ${
-                    isToday ? "bg-rose font-bold text-white" : "font-medium"
+                    isToday ? "bg-primary font-bold text-on-primary" : "font-medium"
                   }`}
                 >
                   {Number(d.slice(8))}

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 import { TONE_CLASS, type Tone } from "@/lib/labels";
+import { Icon, type IconName } from "@/components/icons";
 
 export const inputClass =
   "w-full min-h-11 rounded-lg border border-line bg-surface px-3 py-2 text-ink outline-none transition focus:border-rose focus:ring-2 focus:ring-rose/25 disabled:bg-stone-50";
@@ -18,7 +19,7 @@ export function Field({ label, hint, children }: { label: string; hint?: ReactNo
 const btnBase =
   "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition disabled:opacity-60";
 export const btn = {
-  primary: `${btnBase} bg-rose text-white hover:bg-rose-dark`,
+  primary: `${btnBase} bg-primary text-on-primary hover:bg-primary-hover`,
   secondary: `${btnBase} border border-line bg-surface text-ink hover:bg-sand`,
   danger: `${btnBase} border border-red-200 bg-surface text-red-700 hover:bg-red-50`,
   ghost: `${btnBase} text-ink hover:bg-sand`,
@@ -38,7 +39,7 @@ export function ButtonLink({ variant = "primary", className = "", ...props }: Co
 
 export function Badge({ tone, children }: { tone: Tone; children: ReactNode }) {
   return (
-    <span className={`inline-flex items-center whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${TONE_CLASS[tone]}`}>
+    <span className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${TONE_CLASS[tone]}`}>
       {children}
     </span>
   );
@@ -57,11 +58,21 @@ export function PageHeader({ title, subtitle, action }: { title: string; subtitl
 }
 
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <section className={`rounded-2xl border border-line bg-surface p-4 shadow-sm sm:p-5 ${className}`}>{children}</section>;
+  return <section className={`rounded-2xl border border-line bg-surface p-4 sm:p-5 ${className}`}>{children}</section>;
 }
 
-export function EmptyState({ children }: { children: ReactNode }) {
-  return <p className="rounded-xl border border-dashed border-line p-6 text-center text-sm text-muted">{children}</p>;
+/** מצב ריק – מסביר מה חסר, ואם יש – מציע את הפעולה הבאה */
+export function EmptyState({ children, action }: { children: ReactNode; action?: { href: string; label: string } }) {
+  return (
+    <div className="rounded-xl border border-dashed border-line p-6 text-center text-sm text-muted">
+      <p>{children}</p>
+      {action && (
+        <Link href={action.href} className="mt-2 inline-block font-medium text-rose-dark hover:underline">
+          {action.label}
+        </Link>
+      )}
+    </div>
+  );
 }
 
 /** מסנן בצורת "גלולה" – קישור ששומר על שאר הפרמטרים */
@@ -79,7 +90,7 @@ export function FilterPill({ href, active, children }: { href: string; active: b
 }
 
 /** מתג מקטעים קומפקטי – לתצוגה (רשימה/קאנבאן/לוח שנה) ולטווחי זמן */
-export function ViewToggle({ options, label = "תצוגה" }: { options: { href: string; label: string; active: boolean }[]; label?: string }) {
+export function ViewToggle({ options, label = "תצוגה" }: { options: { href: string; label: string; active: boolean; icon?: IconName }[]; label?: string }) {
   return (
     <div className="inline-flex h-9 shrink-0 items-center rounded-full border border-line bg-surface p-0.5" role="tablist" aria-label={label}>
       {options.map((o) => (
@@ -88,8 +99,9 @@ export function ViewToggle({ options, label = "תצוגה" }: { options: { href:
           href={o.href}
           role="tab"
           aria-selected={o.active}
-          className={`flex h-full items-center whitespace-nowrap rounded-full px-3 text-sm transition ${o.active ? "bg-ink text-on-ink" : "text-ink hover:bg-sand"}`}
+          className={`flex h-full items-center gap-1.5 whitespace-nowrap rounded-full px-3 text-sm transition ${o.active ? "bg-ink text-on-ink" : "text-ink hover:bg-sand"}`}
         >
+          {o.icon && <Icon name={o.icon} />}
           {o.label}
         </Link>
       ))}

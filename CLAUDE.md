@@ -61,6 +61,8 @@ supabase/
 - **שפה:** כל הממשק בעברית, `<html lang="he" dir="rtl">`. הודעות למשתמשת בלשון נקבה, למשל "נסי שוב".
 - **גופן:** Heebo (`next/font/google`).
 - **פלטת צבעים:** משתמשים רק בטוקנים הסמנטיים שמוגדרים ב-`globals.css`: `cream`, `surface`, `sand`, `ink`, `on-ink`, `muted`, `line`, `rose`, `rose-dark`.
+  - כפתור/פעולה ראשית: `bg-primary text-on-primary hover:bg-primary-hover` (לא `bg-rose text-white` – ניגודיות נמוכה מ-4.5:1).
+  - אייקונים: רק מ-`components/icons.tsx` (קו אחיד), לא אימוג'י או תווים כמו ✓ ← ☰.
   - אסור להשתמש ב-`bg-white` או בצבע קבוע אחר. במקום זה: `bg-surface`. על רקע `bg-ink` כותבים `text-on-ink`.
   - בהיר: רקע `#FAF7F4`, טקסט `#2E2A28`, צבע ראשי `#B5838D`.
 - **תצוגה כהה/בהירה:**

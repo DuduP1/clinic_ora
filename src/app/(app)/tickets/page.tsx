@@ -75,8 +75,8 @@ export default async function TicketsPage({ searchParams }: PageProps<"/tickets"
           <>
             <ViewToggle
               options={[
-                { href: href({ view: "" }), label: "☰ רשימה", active: view === "list" },
-                { href: href({ view: "board" }), label: "▦ קאנבאן", active: view === "board" },
+                { href: href({ view: "" }), label: "רשימה", icon: "list", active: view === "list" },
+                { href: href({ view: "board" }), label: "קאנבאן", icon: "board", active: view === "board" },
               ]}
             />
             <ButtonLink href="/tickets/new" className="min-h-9 px-3">
