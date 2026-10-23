@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1440px;height:900px;overflow:hidden;font-family:Heebo,sans-serif;background:#FAFAF7;color:#1E2428}
+header{height:64px;background:#fff;border-bottom:1px solid #E9E4DA;display:flex;align-items:center;gap:28px;padding:0 36px}
+.brand{font-weight:700;font-size:18px}
+header nav{display:flex;gap:4px}
+header nav a{padding:8px 14px;font-size:14px;color:#55606a;border-radius:6px}
+header nav a.on{background:#2F6F8F;color:#fff}
+.search{margin-inline-start:auto;width:360px;height:40px;border:1px solid #D9D3C7;border-radius:6px;display:flex;align-items:center;padding:0 14px;font-size:14px;color:#7b848b;background:#fff}
+main{padding:28px 36px;display:grid;grid-template-columns:1fr 360px;gap:28px}
+h1{font-size:34px;font-weight:300}
+.sub{font-size:14px;color:#55606a;margin:4px 0 20px}
+.facade{background:#fff;border:1px solid #E9E4DA;border-radius:4px;position:relative}
+.band{display:grid;grid-template-columns:72px 1fr;border-bottom:1px solid #EFEBE3;height:56px}
+.band .h{font-size:12px;color:#7b848b;padding:8px 14px;border-inline-end:1px solid #EFEBE3}
+.band .slot{position:relative;padding:6px 10px}
+.appt{position:absolute;top:6px;bottom:6px;background:#E4EEF3;border-radius:2px;padding:6px 10px;font-size:12px;display:flex;gap:10px;align-items:center}
+.appt b{font-size:13px}
+.now{position:absolute;top:0;bottom:0;width:6px;background:#2F6F8F;inset-inline-start:42%}
+.side{display:flex;flex-direction:column;gap:16px}
+.box{background:#fff;border:1px solid #E9E4DA;border-radius:4px;padding:16px}
+.box h3{font-size:14px;margin-bottom:10px}
+.kv{display:flex;justify-content:space-between;font-size:14px;padding:8px 0;border-bottom:1px solid #F1EEE8}
+.kv b{font-weight:700}
+.alert{background:#F6E6DF;border-color:#E8C9BC;color:#8A3A22}
+.btn{display:inline-flex;height:40px;align-items:center;padding:0 16px;background:#1E2428;color:#fff;border-radius:6px;font-size:14px}
+</style></head><body>
+<header><div class="brand">קליניקת אורה</div>
+<nav><a class="on">ראשי</a><a>לקוחות</a><a>תורים</a><a>פניות שירות · 7</a><a>צוות</a></nav>
+<div class="search">חיפוש לקוחה לפי טלפון או שם…</div></header>
+<main>
+<section>
+  <h1>שלום רותם</h1><div class="sub">יום שלישי · 28/10/2026 · 5 תורים היום</div>
+  <div class="facade">
+    <div class="band"><div class="h">09:00</div><div class="slot"><div class="appt" style="inset-inline-start:0;width:45%"><b>שירה כץ</b>ניקוי פנים עמוק · רותם</div></div></div>
+    <div class="band"><div class="h">10:00</div><div class="slot"><div class="appt" style="inset-inline-start:40%;width:38%"><b>מיכל אברהם</b>בוטוקס · נטע</div></div></div>
+    <div class="band"><div class="h">11:00</div><div class="slot"><div class="appt" style="inset-inline-start:20%;width:60%;background:#EFE6D5"><b>דנה לוי</b>לייזר פנים מלא · ליאת</div></div></div>
+    <div class="band"><div class="h">12:00</div><div class="slot"></div></div>
+    <div class="band"><div class="h">13:00</div><div class="slot"></div></div>
+    <div class="band"><div class="h">14:00</div><div class="slot"><div class="appt" style="inset-inline-start:50%;width:40%"><b>יעל מזרחי</b>התייעצות · רותם</div></div></div>
+    <div class="band"><div class="h">15:00</div><div class="slot"><div class="appt" style="inset-inline-start:25%;width:65%;background:#EFE6D5"><b>נועה פרידמן</b>פילינג · נטע</div></div></div>
+    <div class="band"><div class="h">16:00</div><div class="slot"></div></div>
+    <div class="band" style="border:0"><div class="h">17:00</div><div class="slot"></div></div>
+  </div>
+</section>
+<aside class="side">
+  <div class="box alert"><h3>6 פניות ממתינות מעל 24 שעות בלי אחראית</h3><span class="btn">לשיוך</span></div>
+  <div class="box"><h3>מצב פניות</h3>
+    <div class="kv"><span>חדשות</span><b>7</b></div><div class="kv"><span>בטיפול</span><b>3</b></div><div class="kv"><span>נסגרו השבוע</span><b>4</b></div></div>
+  <div class="box"><h3>לפי אחראית</h3>
+    <div class="kv"><span>רותם ברנע</span><b>2</b></div><div class="kv"><span>ליאת כהן</span><b>1</b></div><div class="kv"><span>נטע אדרי</span><b>1</b></div><div class="kv"><span>ללא שיוך</span><b>6</b></div></div>
+</aside>
+</main>
+</body></html>

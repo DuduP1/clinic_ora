@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1440px;height:900px;overflow:hidden;font-family:Heebo,sans-serif;background:#F3F4F6;color:#111827;display:grid;grid-template-columns:240px 1fr}
+aside{background:#fff;border-inline-start:1px solid #E5E7EB;padding:24px 14px}
+.brand{font-weight:700;font-size:17px;margin-bottom:22px;padding:0 10px}
+aside a{display:flex;justify-content:space-between;padding:9px 10px;border-radius:6px;font-size:14px;color:#374151}
+aside a.on{background:#EFF6FF;color:#2563EB;font-weight:600}
+main{padding:24px 32px;display:flex;flex-direction:column;gap:20px}
+.top{display:flex;gap:12px}
+.search{width:400px;height:40px;background:#fff;border:1px solid #D1D5DB;border-radius:8px;display:flex;align-items:center;padding:0 14px;color:#6B7280;font-size:14px}
+.btn{margin-inline-start:auto;height:40px;padding:0 16px;background:#2563EB;color:#fff;border-radius:8px;display:flex;align-items:center;font-size:14px;font-weight:600}
+h1{font-size:24px;font-weight:700}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi{background:#fff;border:1px solid #E5E7EB;border-radius:10px;padding:18px}
+.kpi b{display:block;font-size:30px}
+.kpi span{font-size:13px;color:#6B7280}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{background:#fff;border:1px solid #E5E7EB;border-radius:10px;padding:18px}
+.card h3{font-size:15px;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{text-align:right;padding:9px 4px;border-bottom:1px solid #F3F4F6}
+th{color:#6B7280;font-weight:500;font-size:13px}
+.pill{font-size:12px;padding:2px 8px;border-radius:99px;background:#DBEAFE;color:#1D4ED8}
+</style></head><body>
+<aside><div class="brand">קליניקת אורה</div><a class="on">ראשי</a><a>לקוחות</a><a>תורים</a><a>פניות שירות <span class="pill">7</span></a><a>ניהול צוות</a></aside>
+<main>
+  <div class="top"><div class="search">חיפוש לקוחה לפי טלפון או שם…</div><div class="btn">+ פנייה חדשה</div></div>
+  <h1>שלום, רותם</h1>
+  <div class="kpis"><div class="kpi"><b>7</b><span>פניות חדשות</span></div><div class="kpi"><b>3</b><span>בטיפול</span></div><div class="kpi"><b style="color:#DC2626">6</b><span>ללא אחראית</span></div><div class="kpi"><b>5</b><span>תורים היום</span></div></div>
+  <div class="grid">
+    <div class="card"><h3>תורים היום</h3><table><tr><th>שעה</th><th>לקוחה</th><th>טיפול</th></tr>
+      <tr><td>09:00</td><td>שירה כץ</td><td>ניקוי פנים עמוק</td></tr><tr><td>10:30</td><td>מיכל אברהם</td><td>בוטוקס</td></tr><tr><td>11:15</td><td>דנה לוי</td><td>לייזר פנים מלא</td></tr><tr><td>14:30</td><td>יעל מזרחי</td><td>התייעצות</td></tr></table></div>
+    <div class="card"><h3>פניות לפי אחראית</h3><table><tr><th>אחראית</th><th>חדשות</th><th>בטיפול</th></tr>
+      <tr><td>רותם ברנע</td><td>0</td><td>2</td></tr><tr><td>ליאת כהן</td><td>0</td><td>1</td></tr><tr><td>נטע אדרי</td><td>1</td><td>0</td></tr><tr><td>ללא שיוך</td><td>6</td><td>0</td></tr></table></div>
+  </div>
+</main>
+</body></html>

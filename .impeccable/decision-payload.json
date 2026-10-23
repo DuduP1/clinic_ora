@@ -1,0 +1,74 @@
+{
+  "title": "בחירת עולם עיצובי – CRM קליניקת אורה",
+  "question": "ההגרלה בחרה את 'כרטיס הגוונים'. אפשר לאמץ, לבחור חלופה, או להגריל מחדש.",
+  "options": [
+    {
+      "id": "assigned",
+      "kind": "assigned",
+      "label": "כרטיס הגוונים",
+      "kicker": "THE ROLL",
+      "lineage": "כרטיסי גוונים של מייקאפ וקוסמטיקה",
+      "thesis": "המערכת בנויה כמו כרטיס גוונים: כל משפחת טיפולים היא גוון בשם, והיום נקרא כפס של דוגמיות.",
+      "palette": ["#FBFAF8", "#F1E1D3", "#E3C3A6", "#C99A6B", "#E7B7AE", "#6E4A36", "#3B2A22"],
+      "materials": ["כרטיס מט לבן", "דוגמיות צבע שטוחות", "תוויות קטנות עם מספר גוון"],
+      "viewport": "תפריט צד בגוון פורצלן; ראש המסך: 'פס הגוונים של היום' – התורים כדוגמיות ברוחב לפי משך, לפי שעה; מתחתיו פניות פתוחות לפי אחראית.",
+      "risk": "אם הגוונים יהיו חיוורים מדי, המסך ייראה 'בז'' ומשעמם במקום מחויב.",
+      "raised": [
+        {"from": "aww2-zoo-gardens-guide-map", "raise": "מחויבות מלאה לפלטה: שדות צבע שטוחים במעטפת, לא מסך אפור עם צבע אחד."},
+        {"from": "rw-manual-acetate-tab-board", "raise": "היקף גלוי: בניווט ובמסננים מספרים וסימני כמות יחסיים."},
+        {"from": "rw-timetable-slide-rack", "raise": "משמעת סולם: שלושה גדלים בלבד, הדרגה נישאת במשקל ולא בגודל."},
+        {"from": "japanese-high-density-web", "raise": "אומץ לצפיפות: רשימות במודולים עם קווי שיער, בלי ריווח מנופח."},
+        {"from": "pop-culture-shelf-vertical-video-feed-surface", "raise": "בנייד, הלקוחה שנמצאה תופסת את כל המסך."}
+      ],
+      "html": ".impeccable/mocks/decision/assigned.html"
+    },
+    {
+      "id": "model-pick",
+      "kind": "pick",
+      "kicker": "IMPECCABLE’S PICK",
+      "label": "העיר הלבנה",
+      "lineage": "אדריכלות הבאוהאוס בתל אביב",
+      "thesis": "מודרניזם ים-תיכוני: טיח לבן, פסי מרפסות אופקיים וחלון-מדחום אנכי אחד.",
+      "palette": ["#FAFAF7", "#E9E4DA", "#2F6F8F", "#D9C7A7", "#1E2428"],
+      "materials": ["טיח לבן", "פסים אופקיים", "אור חוף"],
+      "viewport": "סרגל עליון לבן; היום כ'חזית' של פסים אופקיים לפי שעות; פס אנכי כחול-ים מסמן את השעה הנוכחית.",
+      "risk": "הכיוון הכי מוכר: קרוב מאוד ל-CRM לבן ונקי סטנדרטי.",
+      "html": ".impeccable/mocks/decision/model-pick.html"
+    },
+    {
+      "id": "challenger-splitflap",
+      "kind": "challenger",
+      "catalogId": "signals-instruments-split-flap-concourse",
+      "label": "לוח היציאות",
+      "verdict": "competitive",
+      "lineage": "לוח מתחלף בתחנת רכבת",
+      "thesis": "תורי היום כלוח יציאות: שורות לפי שעה, עמודות שלא זזות, סטטוס שמתחלף.",
+      "palette": ["#1C1D1F", "#F4F1EA", "#E0A23B", "#B5473A"],
+      "materials": ["פלאפים מט", "מסגרת פלדה", "נורת ענבר לעיכוב"],
+      "viewport": "לוח תורים כהה בראש המסך: שעה · לקוחה · טיפול · מטפלת · סטטוס.",
+      "case": "מתמזג טוב בבהירות (תורים לפי שעה), אבל הצוות לא מזדהה עם עולם של תחנת רכבת.",
+      "risk": "מסך כהה ותחושת תחבורה; עלול להיראות כתחפושת.",
+      "html": ".impeccable/mocks/decision/challenger-splitflap.html",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-split-flap-concourse-hero.webp"
+    },
+    {"id": "challenger-zoo", "kind": "challenger", "catalogId": "aww2-zoo-gardens-guide-map", "label": "מפת גן החיות", "verdict": "declined", "lineage": "מפות מדריך מודפסות", "thesis": "אזורי המערכת כ'איים' של צבע שטוח.", "palette": ["#8ED462", "#F5F1E4", "#2C2E2A", "#FF705D"], "materials": ["צבע שטוח"], "viewport": "אי צבע אחד גדול לכל מסך.", "case": "לא מתאים לכלי עבודה יומיומי בקליניקה.", "risk": "ילדותי למרפאה אסתטית.", "kept": "מחויבות מלאה לפלטה במעטפת."},
+    {"id": "challenger-acetate", "kind": "challenger", "catalogId": "rw-manual-acetate-tab-board", "label": "מדריך עם לשוניות", "verdict": "declined", "lineage": "מדריכי תוכנה מודפסים", "thesis": "לשוניות בגובה יחסי להיקף.", "palette": ["#E8762D", "#F2C230", "#2E7D5B", "#3A49A8"], "materials": ["אצטט", "קרטון צבעוני"], "viewport": "פס לשוניות לאורך הקצה.", "case": "רחוק מעולם הקליניקה.", "risk": "רטרו-טכני.", "kept": "היקף גלוי בניווט."},
+    {"id": "challenger-timetable", "kind": "challenger", "catalogId": "rw-timetable-slide-rack", "label": "לוח זמנים בגודל אחד", "verdict": "declined", "lineage": "לוחות זמנים של חברות תעופה", "thesis": "כל הטקסט בגודל אחד, הדרגה במשקל.", "palette": ["#D9A93A", "#24272B", "#F2EBDD", "#C23B22"], "materials": ["זכוכית צבועה"], "viewport": "מתלה שקופיות מוטה.", "case": "ההטיה פוגעת בקריאוּת בעברית.", "risk": "קשה לשימוש.", "kept": "משמעת סולם טיפוגרפי."},
+    {"id": "challenger-japanese", "kind": "challenger", "catalogId": "japanese-high-density-web", "label": "צפיפות יפנית", "verdict": "declined", "lineage": "אתרים יפניים עמוסים", "thesis": "מודולים צפופים עם קווי שיער.", "palette": ["#FFFFFF", "#111111", "#D7261E", "#D9D9D9"], "materials": ["קווי שיער"], "viewport": "פסיפס מודולים.", "case": "צפוף מדי לטלפון בדלפק.", "risk": "עומס.", "kept": "אומץ לצפיפות ברשימות."},
+    {"id": "challenger-feed", "kind": "challenger", "catalogId": "pop-culture-shelf-vertical-video-feed-surface", "label": "פיד אנכי", "verdict": "declined", "lineage": "פיד וידאו אנכי", "thesis": "פריט אחד תופס את כל המסך.", "palette": ["#000000", "#FFFFFF"], "materials": ["מסך מלא"], "viewport": "כרטיס אחד בכל פעם.", "case": "לא מתאים לעבודה על כמה רשומות.", "risk": "איבוד תמונת מצב.", "kept": "בנייד, הלקוחה שנמצאה תופסת את כל המסך."}
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "code", "toggle": false},
+  "canon": true,
+  "canonCard": {
+    "kind": "canon",
+    "label": "הסטנדרט של הקטגוריה",
+    "thesis": "CRM לבן ונקי כמו של המתחרים, בביצוע מושלם.",
+    "palette": ["#FFFFFF", "#111827", "#2563EB", "#F3F4F6"],
+    "materials": ["רשת נקייה", "כרטיסים"],
+    "viewport": "תפריט צד, מדדים בקופסאות, טבלאות.",
+    "risk": "לא ניתן להבדיל מהמתחרים – בכוונה.",
+    "html": ".impeccable/mocks/decision/canon.html"
+  },
+  "steer": true
+}

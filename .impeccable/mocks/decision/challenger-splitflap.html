@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1440px;height:900px;overflow:hidden;font-family:Heebo,sans-serif;background:#F4F1EA;color:#1C1D1F;display:grid;grid-template-columns:232px 1fr}
+aside{background:#fff;border-inline-start:1px solid #E2DDD2;padding:26px 16px}
+.brand{font-weight:800;font-size:18px;margin-bottom:24px}
+aside a{display:block;padding:10px 12px;border-radius:6px;font-size:14px;color:#4a4b4f}
+aside a.on{background:#1C1D1F;color:#F4F1EA;font-weight:700}
+main{padding:26px 34px;display:flex;flex-direction:column;gap:20px}
+.top{display:flex;gap:12px;align-items:center}
+.search{width:420px;height:42px;background:#fff;border:1px solid #D8D2C5;border-radius:6px;display:flex;align-items:center;padding:0 14px;color:#7a7b7f;font-size:14px}
+.btn{margin-inline-start:auto;height:42px;padding:0 18px;border-radius:6px;background:#1C1D1F;color:#fff;display:flex;align-items:center;font-size:14px}
+h1{font-size:30px;font-weight:800}
+.board{background:#1C1D1F;border-radius:10px;padding:18px;color:#F4F1EA}
+.board .hd{display:grid;grid-template-columns:110px 1.2fr 1.4fr 1fr 150px;gap:6px;font-size:12px;color:#9a9890;letter-spacing:.06em;padding:0 4px 10px}
+.r{display:grid;grid-template-columns:110px 1.2fr 1.4fr 1fr 150px;gap:6px;margin-bottom:6px}
+.c{background:#2A2B2E;border-radius:4px;padding:10px 12px;font-size:17px;font-weight:700;position:relative;overflow:hidden}
+.c::after{content:"";position:absolute;inset-inline:0;top:50%;height:1px;background:#141516}
+.st{font-size:14px}
+.amber{color:#E0A23B}.red{color:#E07A6A}.ok{color:#9CC8A0}
+.lower{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card{background:#fff;border:1px solid #E2DDD2;border-radius:8px;padding:16px 18px;font-size:14px}
+.card h3{font-size:14px;margin-bottom:8px}
+.kv{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #EFEBE3}
+</style></head><body>
+<aside><div class="brand">קליניקת אורה</div><a class="on">ראשי</a><a>לקוחות</a><a>תורים</a><a>פניות שירות · 7</a><a>ניהול צוות</a></aside>
+<main>
+  <div class="top"><div class="search">חיפוש לקוחה לפי טלפון או שם…</div><div class="btn">+ פנייה</div></div>
+  <h1>תורי היום · 28/10</h1>
+  <div class="board">
+    <div class="hd"><span>שעה</span><span>לקוחה</span><span>טיפול</span><span>מטפלת</span><span>סטטוס</span></div>
+    <div class="r"><div class="c">09:00</div><div class="c">שירה כץ</div><div class="c">ניקוי פנים עמוק</div><div class="c">רותם</div><div class="c st ok">בוצע</div></div>
+    <div class="r"><div class="c">10:30</div><div class="c">מיכל אברהם</div><div class="c">בוטוקס</div><div class="c">נטע</div><div class="c st ok">בוצע</div></div>
+    <div class="r"><div class="c">11:15</div><div class="c">דנה לוי</div><div class="c">לייזר פנים מלא</div><div class="c">ליאת</div><div class="c st amber">בטיפול עכשיו</div></div>
+    <div class="r"><div class="c">14:30</div><div class="c">יעל מזרחי</div><div class="c">התייעצות</div><div class="c">רותם</div><div class="c st">עתידי</div></div>
+    <div class="r"><div class="c">15:15</div><div class="c">נועה פרידמן</div><div class="c">פילינג</div><div class="c">נטע</div><div class="c st red">בוטל</div></div>
+  </div>
+  <div class="lower">
+    <div class="card"><h3>פניות</h3><div class="kv"><span>חדשות</span><b>7</b></div><div class="kv"><span>בטיפול</span><b>3</b></div><div class="kv" style="color:#B5473A"><span>ללא אחראית מעל 24 שעות</span><b>6</b></div></div>
+    <div class="card"><h3>לפי אחראית</h3><div class="kv"><span>רותם</span><b>2</b></div><div class="kv"><span>ליאת</span><b>1</b></div><div class="kv"><span>נטע</span><b>1</b></div></div>
+  </div>
+</main>
+</body></html>

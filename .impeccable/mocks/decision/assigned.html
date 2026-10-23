@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1440px;height:900px;overflow:hidden;font-family:Heebo,sans-serif;background:#FBFAF8;color:#3B2A22;display:grid;grid-template-columns:248px 1fr}
+aside{background:#F1E1D3;padding:28px 18px;display:flex;flex-direction:column;gap:28px}
+.brand{font-weight:300;font-size:26px;letter-spacing:-.01em}
+.brand small{display:block;font-size:11px;font-weight:500;letter-spacing:.08em;color:#6E4A36;margin-top:2px}
+nav a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;font-size:14px;color:#6E4A36;text-decoration:none}
+nav a.on{background:#FBFAF8;color:#3B2A22;font-weight:700}
+nav a .sw{width:14px;height:14px;border-radius:3px}
+nav a .n{margin-inline-start:auto;font-size:12px;font-weight:700;background:#3B2A22;color:#FBFAF8;border-radius:99px;padding:1px 8px}
+main{padding:28px 36px;display:flex;flex-direction:column;gap:22px}
+.top{display:flex;align-items:center;gap:14px}
+.search{flex:1;max-width:420px;height:42px;border:1px solid #E3C3A6;border-radius:99px;background:#fff;padding:0 18px;display:flex;align-items:center;color:#8a7466;font-size:14px}
+.btn{height:42px;padding:0 18px;border-radius:8px;display:flex;align-items:center;font-size:14px;font-weight:500;border:1px solid #E3C3A6;background:#fff}
+.btn.p{background:#3B2A22;color:#FBFAF8;border-color:#3B2A22}
+h1{font-weight:300;font-size:44px;letter-spacing:-.02em;line-height:1}
+.date{font-size:14px;color:#6E4A36;margin-top:6px}
+.strip{background:#fff;border:1px solid #EADBCB;border-radius:12px;padding:18px 20px}
+.strip h2{font-size:14px;font-weight:700;display:flex;justify-content:space-between}
+.strip h2 span{font-weight:400;color:#6E4A36}
+.sw-row{display:flex;gap:4px;margin-top:14px;height:96px}
+.chip{border-radius:6px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;font-size:12px}
+.chip b{font-size:15px}
+.chip .t{font-weight:700;letter-spacing:.02em}
+.gap{background:#F7F2EC;border:1px dashed #EADBCB;border-radius:6px}
+.legend{display:flex;gap:18px;margin-top:12px;font-size:12px;color:#6E4A36}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-inline-end:6px}
+.row{display:grid;grid-template-columns:1.2fr 1fr;gap:22px}
+.card{background:#fff;border:1px solid #EADBCB;border-radius:12px;padding:18px 20px}
+.card h3{font-size:14px;font-weight:700;margin-bottom:10px}
+.stat{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #EADBCB;border-radius:12px;overflow:hidden;background:#fff}
+.stat div{padding:14px 18px;border-inline-start:1px solid #EADBCB;font-size:13px;color:#6E4A36}
+.stat div:first-child{border:0}
+.stat b{display:block;font-size:28px;font-weight:300;color:#3B2A22}
+.stat .al{background:#F6E3DF;color:#8E3B2E}.stat .al b{color:#8E3B2E;font-weight:500}
+table{width:100%;border-collapse:collapse;font-size:13px}
+td,th{padding:9px 4px;border-bottom:1px solid #F1E6DA;text-align:right}
+th{color:#6E4A36;font-weight:500}
+.bar{height:8px;border-radius:2px;background:#C99A6B;display:inline-block}
+</style></head><body>
+<aside>
+  <div class="brand">קליניקת אורה<small>N° 01 · CRM</small></div>
+  <nav>
+    <a class="on"><span class="sw" style="background:#3B2A22"></span>ראשי</a>
+    <a><span class="sw" style="background:#E3C3A6"></span>לקוחות<span class="n">12</span></a>
+    <a><span class="sw" style="background:#C99A6B"></span>תורים</a>
+    <a><span class="sw" style="background:#E7B7AE"></span>פניות שירות<span class="n">7</span></a>
+    <a><span class="sw" style="background:#6E4A36"></span>ניהול צוות</a>
+  </nav>
+</aside>
+<main>
+  <div class="top">
+    <div class="search">חיפוש לקוחה לפי טלפון או שם…</div>
+    <div style="flex:1"></div>
+    <div class="btn">+ לקוחה</div><div class="btn">+ תור</div><div class="btn p">+ פנייה</div>
+  </div>
+  <div><h1>בוקר טוב, רותם</h1><div class="date">יום שלישי · 28/10/2026</div></div>
+  <div class="stat">
+    <div><b>5</b>תורים היום</div><div><b>7</b>פניות חדשות</div><div><b>3</b>בטיפול</div><div class="al"><b>6</b>ללא אחראית · מעל 24 שעות</div>
+  </div>
+  <section class="strip">
+    <h2>פס הגוונים של היום <span>09:00 – 19:00 · כל דוגמית = תור, רוחב לפי משך</span></h2>
+    <div class="sw-row">
+      <div class="chip" style="flex:60;background:#F1E1D3"><span class="t">09:00</span><span><b>שירה כץ</b><br>ניקוי פנים עמוק · רותם</span></div>
+      <div class="gap" style="flex:30"></div>
+      <div class="chip" style="flex:45;background:#E7B7AE"><span class="t">10:30</span><span><b>מיכל אברהם</b><br>בוטוקס · נטע</span></div>
+      <div class="chip" style="flex:60;background:#C99A6B;color:#fff"><span class="t">11:15</span><span><b>דנה לוי</b><br>לייזר פנים מלא · ליאת</span></div>
+      <div class="gap" style="flex:90"></div>
+      <div class="chip" style="flex:45;background:#6E4A36;color:#FBFAF8"><span class="t">14:30</span><span><b>יעל מזרחי</b><br>התייעצות · רותם</span></div>
+      <div class="chip" style="flex:75;background:#E3C3A6"><span class="t">15:15</span><span><b>נועה פרידמן</b><br>פילינג · נטע</span></div>
+      <div class="gap" style="flex:120"></div>
+    </div>
+    <div class="legend"><span><i style="background:#F1E1D3"></i>פורצלן · ניקוי פנים</span><span><i style="background:#E7B7AE"></i>סומק · הזרקות</span><span><i style="background:#C99A6B"></i>דבש · לייזר</span><span><i style="background:#E3C3A6"></i>חול · פילינג</span><span><i style="background:#6E4A36"></i>מוקה · התייעצות</span></div>
+  </section>
+  <div class="row">
+    <div class="card"><h3>פניות פתוחות לפי אחראית</h3>
+      <table><tr><th>אחראית</th><th>חדשות</th><th>בטיפול</th><th>עומס</th></tr>
+      <tr><td>ליאת כהן</td><td>0</td><td>1</td><td><span class="bar" style="width:20px"></span></td></tr>
+      <tr><td>נטע אדרי</td><td>1</td><td>0</td><td><span class="bar" style="width:20px"></span></td></tr>
+      <tr><td>רותם ברנע</td><td>0</td><td>2</td><td><span class="bar" style="width:40px"></span></td></tr>
+      <tr><td style="color:#8E3B2E;font-weight:700">ללא שיוך</td><td>6</td><td>0</td><td><span class="bar" style="width:120px;background:#C2685A"></span></td></tr></table>
+    </div>
+    <div class="card"><h3>ממתינות לשיוך</h3>
+      <table><tr><td>#1023 · מלניה טראמפ</td><td>קביעת תור לטיפול פנים</td></tr>
+      <tr><td>#1021 · לקוחה חדשה</td><td>פנייה מהסוכנת אורית</td></tr>
+      <tr><td>#1020 · דנה לוי</td><td>תור נוסף לניקוי פנים</td></tr></table>
+    </div>
+  </div>
+</main>
+</body></html>
