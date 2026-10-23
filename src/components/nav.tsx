@@ -30,7 +30,7 @@ function useActive() {
 }
 
 /** תפריט צד – מחשב */
-export function SideNav({ isAdmin, newTickets }: { isAdmin: boolean; newTickets: number }) {
+export function SideNav({ isAdmin, newTickets, customers }: { isAdmin: boolean; newTickets: number; customers: number }) {
   const isActive = useActive();
   return (
     <nav className="space-y-1">
@@ -38,15 +38,17 @@ export function SideNav({ isAdmin, newTickets }: { isAdmin: boolean; newTickets:
         <Link
           key={i.href}
           href={i.href}
+          aria-current={isActive(i.href) ? "page" : undefined}
           className={`flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm transition ${
-            isActive(i.href) ? "bg-rose/15 font-semibold text-rose-dark" : "text-ink hover:bg-sand"
+            isActive(i.href) ? "bg-surface font-bold text-ink" : "text-on-shell-muted hover:bg-surface/60 hover:text-ink"
           }`}
         >
           <Icon d={i.icon} />
           <span className="flex-1">{i.sideLabel ?? i.label}</span>
           {i.href === "/tickets" && newTickets > 0 && (
-            <span className="rounded-full bg-sky-100 px-2 py-0.5 text-xs font-semibold text-sky-800 tabular-nums ring-1 ring-sky-200 ring-inset">{newTickets}</span>
+            <span className="rounded-full bg-ink px-2 py-0.5 text-xs font-bold text-on-ink tabular-nums" title="פניות חדשות">{newTickets}</span>
           )}
+          {i.href === "/customers" && <span className="text-xs text-on-shell-muted tabular-nums">{customers}</span>}
         </Link>
       ))}
     </nav>
@@ -64,13 +66,13 @@ export function BottomNav({ newTickets }: { newTickets: number }) {
             <Link
               href={i.href}
               className={`relative flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs ${
-                isActive(i.href) ? "font-semibold text-rose-dark" : "text-muted"
+                isActive(i.href) ? "font-semibold text-accent-strong" : "text-muted"
               }`}
             >
               <Icon d={i.icon} />
               {i.label}
               {i.href === "/tickets" && newTickets > 0 && (
-                <span className="absolute top-1.5 left-[calc(50%+4px)] rounded-full bg-sky-100 px-1.5 text-[10px] font-semibold leading-4 text-sky-800 tabular-nums ring-1 ring-sky-200 ring-inset">
+                <span className="absolute top-1.5 left-[calc(50%+4px)] rounded-full bg-ink px-1.5 text-[10px] font-bold leading-4 text-on-ink tabular-nums">
                   {newTickets}
                 </span>
               )}

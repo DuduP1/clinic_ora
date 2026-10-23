@@ -47,7 +47,7 @@ export default async function CustomersPage({ searchParams }: PageProps<"/custom
           q ? (
             <>
               {rows.length} תואמות ל-&quot;{q}&quot; ·{" "}
-              <Link href="/customers" className="text-rose-dark hover:underline">
+              <Link href="/customers" className="text-accent-strong hover:underline">
                 ניקוי חיפוש
               </Link>
             </>
@@ -68,7 +68,7 @@ export default async function CustomersPage({ searchParams }: PageProps<"/custom
         <EmptyState>
           {q ? (
             <>
-              לא נמצאה לקוחה. <Link href={newHref} className="font-semibold text-rose-dark underline">ליצירת לקוחה חדשה</Link>
+              לא נמצאה לקוחה. <Link href={newHref} className="font-semibold text-accent-strong underline">ליצירת לקוחה חדשה</Link>
             </>
           ) : (
             "אין עדיין לקוחות במערכת"
@@ -91,7 +91,7 @@ export default async function CustomersPage({ searchParams }: PageProps<"/custom
                 {rows.map((c) => (
                   <tr key={c.id} className="border-t border-line hover:bg-cream">
                     <td className="px-4 py-3">
-                      <Link href={`/customers/${c.id}`} className="font-medium text-rose-dark hover:underline">
+                      <Link href={`/customers/${c.id}`} className="font-medium text-accent-strong hover:underline">
                         {c.full_name}
                       </Link>
                     </td>

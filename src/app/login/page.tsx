@@ -9,7 +9,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
   return (
     <main className="relative flex min-h-screen items-center justify-center p-4">
       <ThemeToggle className="absolute top-4 left-4" />
-      <div className="w-full max-w-sm rounded-2xl border border-line bg-surface p-6 shadow-sm sm:p-8">
+      <div className="w-full max-w-sm rounded-xl border border-line bg-surface p-6 sm:p-8">
         <div className="mb-6 text-center">
           <h1>
             {/* בתצוגה כהה – גרסה מוארת של הלוגו, כדי שהכיתוב יישאר קריא */}

@@ -8,6 +8,7 @@ import { AppointmentList, APPOINTMENT_SELECT, pickNextAppointment, type Appointm
 import { TicketList, TICKET_SELECT, type TicketRow } from "@/components/ticket-list";
 import { ButtonLink, Card } from "@/components/ui";
 import { deleteCustomer } from "../actions";
+import { SHADES, shadeOf } from "@/lib/shades";
 
 export default async function CustomerCardPage({ params }: PageProps<"/customers/[id]">) {
   const me = await requireStaff();
@@ -28,11 +29,27 @@ export default async function CustomerCardPage({ params }: PageProps<"/customers
       <Card>
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold">{customer.full_name}</h1>
-            <a href={`tel:${customer.phone}`} className="mt-1 inline-block text-lg text-rose-dark" dir="ltr">
+            <h1 className="text-4xl font-light tracking-[-0.02em]">{customer.full_name}</h1>
+            <a href={`tel:${customer.phone}`} className="mt-1 inline-block text-lg text-accent-strong" dir="ltr">
               {formatPhone(customer.phone)}
             </a>
             <p className="mt-1 text-xs text-muted">לקוחה מאז {formatDate(customer.created_at)}</p>
+            {/* פלטת הטיפולים שלה – כל תור (שלא בוטל) כדוגמית, מהישן לחדש */}
+            {(appts ?? []).some((a) => a.status !== "cancelled") && (
+              <div className="mt-3 flex items-center gap-1" aria-label="פלטת הטיפולים">
+                {[...(appts ?? [])]
+                  .filter((a) => a.status !== "cancelled")
+                  .reverse()
+                  .map((a) => (
+                    <span
+                      key={a.id}
+                      title={`${formatDate(a.starts_at)} · ${a.treatment?.name ?? ""}`}
+                      className={`h-5 w-7 rounded-[4px] ${SHADES[shadeOf(a.treatment?.name)].bg} ${a.status === "scheduled" ? "ring-2 ring-ink/70 ring-offset-1 ring-offset-surface" : ""}`}
+                    />
+                  ))}
+                <span className="ms-2 text-xs text-muted">פלטת הטיפולים</span>
+              </div>
+            )}
           </div>
           <div className="flex flex-wrap gap-2">
             <ButtonLink href={`/appointments/new?customer=${id}`}>+ קביעת תור</ButtonLink>

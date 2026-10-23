@@ -5,6 +5,7 @@ import { APPOINTMENT_STATUS, type AppointmentStatus } from "@/lib/labels";
 import { formatDateTime, formatTime } from "@/lib/dates";
 import { setAppointmentStatus } from "@/app/(app)/appointments/actions";
 import { Icon } from "@/components/icons";
+import { SHADES, shadeOf } from "@/lib/shades";
 
 export type AppointmentRow = {
   id: string;
@@ -57,12 +58,13 @@ export function AppointmentList({
               <div className="mt-0.5 text-sm text-muted">
                 {showCustomer && a.customer && (
                   <>
-                    <Link href={`/customers/${a.customer.id}`} className="font-medium text-rose-dark hover:underline">
+                    <Link href={`/customers/${a.customer.id}`} className="font-medium text-accent-strong hover:underline">
                       {a.customer.full_name}
                     </Link>
                     {" · "}
                   </>
                 )}
+                {a.treatment && <span className={`me-1.5 inline-block h-2.5 w-2.5 rounded-[3px] align-[-1px] ${SHADES[shadeOf(a.treatment.name)].bg}`} aria-hidden />}
                 {a.treatment?.name}
                 {a.treatment && ` (${a.treatment.duration_min} דק׳)`}
                 {a.staff && ` · ${a.staff.full_name}`}

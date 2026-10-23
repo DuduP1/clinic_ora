@@ -44,14 +44,14 @@ export default async function TicketPage({ params }: PageProps<"/tickets/[id]">)
       <div className="space-y-4">
         <Card>
           <div className="flex flex-wrap items-center gap-2">
-            <h1 className="text-2xl font-bold">פנייה #{t.ticket_number}</h1>
+            <h1 className="text-3xl font-light tracking-[-0.02em]">פנייה <span className="tabular-nums">#{t.ticket_number}</span></h1>
             <Badge tone={st.tone}>{st.label}</Badge>
-            {t.source === "agent" && <Badge tone="rose"><Icon name="bot" className="h-3.5 w-3.5" />{SOURCE_LABEL.agent}</Badge>}
+            {t.source === "agent" && <Badge tone="accent"><Icon name="bot" className="h-3.5 w-3.5" />{SOURCE_LABEL.agent}</Badge>}
             {isStale(t) && <Badge tone="red">ללא שיוך מעל 24 שעות</Badge>}
           </div>
           {t.customer && (
             <p className="mt-2 text-sm">
-              <Link href={`/customers/${t.customer.id}`} className="font-semibold text-rose-dark hover:underline">
+              <Link href={`/customers/${t.customer.id}`} className="font-semibold text-accent-strong hover:underline">
                 {t.customer.full_name}
               </Link>
               <span className="text-muted">

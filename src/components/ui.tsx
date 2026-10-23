@@ -4,7 +4,7 @@ import { TONE_CLASS, type Tone } from "@/lib/labels";
 import { Icon, type IconName } from "@/components/icons";
 
 export const inputClass =
-  "w-full min-h-11 rounded-lg border border-line bg-surface px-3 py-2 text-ink outline-none transition focus:border-rose focus:ring-2 focus:ring-rose/25 disabled:bg-stone-50";
+  "w-full min-h-11 rounded-lg border border-line bg-surface px-3 py-2 text-ink outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/25 disabled:bg-stone-50";
 
 export function Field({ label, hint, children }: { label: string; hint?: ReactNode; children: ReactNode }) {
   return (
@@ -49,7 +49,7 @@ export function PageHeader({ title, subtitle, action }: { title: string; subtitl
   return (
     <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
       <div>
-        <h1 className="text-2xl font-bold">{title}</h1>
+        <h1 className="text-3xl font-light tracking-[-0.02em]">{title}</h1>
         {subtitle && <p className="mt-0.5 text-sm text-muted">{subtitle}</p>}
       </div>
       {action}
@@ -58,7 +58,7 @@ export function PageHeader({ title, subtitle, action }: { title: string; subtitl
 }
 
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <section className={`rounded-2xl border border-line bg-surface p-4 sm:p-5 ${className}`}>{children}</section>;
+  return <section className={`rounded-xl border border-line bg-surface p-4 sm:p-5 ${className}`}>{children}</section>;
 }
 
 /** מצב ריק – מסביר מה חסר, ואם יש – מציע את הפעולה הבאה */
@@ -67,7 +67,7 @@ export function EmptyState({ children, action }: { children: ReactNode; action?:
     <div className="rounded-xl border border-dashed border-line p-6 text-center text-sm text-muted">
       <p>{children}</p>
       {action && (
-        <Link href={action.href} className="mt-2 inline-block font-medium text-rose-dark hover:underline">
+        <Link href={action.href} className="mt-2 inline-block font-medium text-accent-strong hover:underline">
           {action.label}
         </Link>
       )}
@@ -117,7 +117,7 @@ export function Toolbar({ title, count, filters, actions }: { title: string; cou
   return (
     <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-2">
       <div className="flex items-baseline gap-2">
-        <h1 className="text-xl font-bold">{title}</h1>
+        <h1 className="text-[1.75rem] leading-tight font-light tracking-[-0.02em]">{title}</h1>
         {count !== undefined && <span className="text-sm text-muted">{count}</span>}
       </div>
       {filters && <div className="flex flex-wrap items-center gap-2">{filters}</div>}

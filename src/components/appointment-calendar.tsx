@@ -114,7 +114,7 @@ export function AppointmentCalendar({
                 aria-current={isToday ? "date" : undefined}
                 className={`flex min-h-14 flex-col gap-1 border-b border-l border-line p-1 transition hover:bg-sand/60 sm:h-[max(5rem,calc((100dvh-15.5rem)/var(--weeks)))] sm:min-h-0 sm:overflow-hidden sm:p-1.5 ${
                   inMonth ? (isSaturday ? "bg-stone-50" : "bg-surface") : "bg-cream text-muted/60"
-                } ${isSelected ? "relative z-10 ring-2 ring-rose ring-inset" : ""}`}
+                } ${isSelected ? "relative z-10 ring-2 ring-accent ring-inset" : ""}`}
               >
                 <span
                   className={`flex h-6 w-6 items-center justify-center self-start rounded-full text-xs ${
@@ -131,7 +131,7 @@ export function AppointmentCalendar({
                       <span className="font-semibold">{formatTime(a.starts_at)}</span> {a.customer?.full_name}
                     </li>
                   ))}
-                  {list.length > 3 && <li className="px-1 text-[11px] font-medium text-rose-dark">+{list.length - 3} נוספים</li>}
+                  {list.length > 3 && <li className="px-1 text-[11px] font-medium text-accent-strong">+{list.length - 3} נוספים</li>}
                 </ul>
 
                 {/* נייד: נקודות */}
